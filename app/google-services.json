@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "124602562168",
+    "firebase_url": "https://yesapp-6897c.firebaseio.com",
+    "project_id": "yesapp-6897c",
+    "storage_bucket": "yesapp-6897c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124602562168:android:143512d0f10117d0",
+        "android_client_info": {
+          "package_name": "com.yesapp.yesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124602562168-lg5slto66mamr8c6tv9ab9f3knatunqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwQnqrlD263ezBwlHEq32GBc_DfCMNtEI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
