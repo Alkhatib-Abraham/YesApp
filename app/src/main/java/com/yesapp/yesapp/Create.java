@@ -5,17 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
+public class Create extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_create);
     }
 
-    public void gotocreate(View view) {
-        Intent i = new Intent(MainActivity.this, Create.class);
-        startActivity(i);
+
+    public void post(View view) {
+
     }
 }
