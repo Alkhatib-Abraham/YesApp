@@ -1,13 +1,17 @@
 package com.yesapp.yesapp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +35,7 @@ public class Create extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
-         cityName = (EditText) findViewById(R.id.editText);
+        cityName = (EditText) findViewById(R.id.editText);
         action = (EditText) findViewById(R.id.editText3);
 
 
@@ -46,7 +50,16 @@ public class Create extends AppCompatActivity {
         post.setCityName(cityName.getText().toString());
         post.setAction(action.getText().toString());
         myName.push().setValue(post);
-
+        myName.push().setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(Create.this, "Post Add Successfully", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(Create.this, "Error : post not add 🙁 ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
 
