@@ -19,10 +19,11 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="375dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="0dp"
+        android:layout_marginTop="343dp"
         android:text="TextView"
         android:textSize="24sp" />
 
@@ -35,4 +36,11 @@
         android:layout_marginBottom="85dp"
         android:text="Button"
         android:onClick="Read"/>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="339dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 </RelativeLayout>
