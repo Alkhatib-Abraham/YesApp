@@ -37,124 +37,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         texts = (TextView) findViewById(R.id.textView);
 
-<<<<<<< HEAD
-=======
-        final   ArrayList<ListItem> Items = new  ArrayList<ListItem> ();
-        Items.add(new ListItem("hussien","he is good man"));
-        Items.add(new ListItem("ahmed","he is ban man"));
-        Items.add(new ListItem("jasim","he is okey man"));
 
-        final MyCustomAdapter myadpter= new MyCustomAdapter(Items);
-
-        ListView ls=(ListView)findViewById(R.id.list);
-        ls.setAdapter(myadpter);
-
-
->>>>>>> fea668ff5ba5bd077b97dfe8f281cabdb64f6ca8
     }
 
     public void gotocreate(View view) {
         Intent i = new Intent(MainActivity.this, Create.class);
         startActivity(i);
-    }
-
-<<<<<<< HEAD
-    public void Read(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference posts = database.getReference("posts");
-
-        posts.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Post>>() {});
-
-                List<Posts> posts = new ArrayList<>(results.values());
-
-                for (Posts post : posts) {
-                    texts.setText(post.getAction() + " " + post.getCityName());
-                }
-
-            }
-=======
-//    public void Read(View view) {
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference posts = database.getReference("posts");
-//
-//        posts.addValueEventListener(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {});
-//
-//                List<Posts> posts = new ArrayList<>(results.values());
-//
-//                for (Posts post : posts) {
-//                   texts.setText(post.getAction() + " " + post.getCityName());
-//
-//
-//                }
-//
-//            }
->>>>>>> fea668ff5ba5bd077b97dfe8f281cabdb64f6ca8
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-<<<<<<< HEAD
-=======
-    }
-
-    class MyCustomAdapter extends BaseAdapter
-    {
-        ArrayList<ListItem> Items= new ArrayList<>();
-        MyCustomAdapter(ArrayList<ListItem> Items ) {
-            this.Items=Items;
-
-<<<<<<< HEAD
-        }
-=======
-                for (Posts post : posts) {
-                   texts.setText(post.getAction() + post.getCityName());
-<<<<<<< HEAD
->>>>>>> parent of 8e95988... fixing some bugs
-=======
->>>>>>> parent of 8e95988... fixing some bugs
-
-
-        @Override
-        public int getCount() {
-            return Items.size();
-        }
-
-        @Override
-        public String getItem(int position) {
-            return Items.get(position).Name;
-
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return  position;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            LayoutInflater linflater =getLayoutInflater();
-            View view1=linflater.inflate(R.layout.row_view, null);
-
-            TextView txtname =(TextView) view1.findViewById(R.id.txt_city);
-            TextView txtdes =(TextView) view1.findViewById(R.id.txt_action);
-          //  txtname.setText(Items.get(i).Name);
-          //  txtdes.setText(Items.get(i).Desc);
-            return view1;
-
-        }
->>>>>>> fea668ff5ba5bd077b97dfe8f281cabdb64f6ca8
-
     }
 
 
