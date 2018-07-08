@@ -28,13 +28,13 @@ public class Create extends AppCompatActivity {
     public void post(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("message");
+        writeNewUser(messageText.getText().toString(), messageText.getText().toString() );
 
-        myRef.setValue(messageText.getText().toString());
     }
 
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
+    private void writeNewUser(String userId, String message ) {
+        User user = new User(userId, message);
 
-        myRef.child("users").child(userId).setValue(user);
+        myRef.child("users").child(userId).setValue(message);
     }
 }
