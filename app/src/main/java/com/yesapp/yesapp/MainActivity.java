@@ -37,27 +37,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         texts = (TextView) findViewById(R.id.textView);
 
-        final   ArrayList<ListItem> Items=new  ArrayList<ListItem> ();
+        final   ArrayList<ListItem> Items = new  ArrayList<ListItem> ();
         Items.add(new ListItem("hussien","he is good man"));
         Items.add(new ListItem("ahmed","he is ban man"));
         Items.add(new ListItem("jasim","he is okey man"));
-        Items.add(new ListItem("jena","he is well man"));
+
         final MyCustomAdapter myadpter= new MyCustomAdapter(Items);
 
         ListView ls=(ListView)findViewById(R.id.list);
         ls.setAdapter(myadpter);
-        ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView txtname =(TextView) view.findViewById(R.id.txt_action);
-                TextView txtdes =(TextView) view.findViewById(R.id.txt_city);
-                Toast.makeText(getApplicationContext(),txtname.getText(),Toast.LENGTH_LONG).show();
-                Items.add(new ListItem("rana", "he is okey "));
-                Items.add(new ListItem("sama", "he is well "));
-                myadpter.notifyDataSetChanged();
 
-            }
-        });
 
     }
 
@@ -66,24 +55,26 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void Read(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference posts = database.getReference("posts");
-
-        posts.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {});
-
-                List<Posts> posts = new ArrayList<>(results.values());
-
-                for (Posts post : posts) {
-                   texts.setText(post.getAction() + " " + post.getCityName());
-
-                }
-
-            }
+//    public void Read(View view) {
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference posts = database.getReference("posts");
+//
+//        posts.addValueEventListener(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {});
+//
+//                List<Posts> posts = new ArrayList<>(results.values());
+//
+//                for (Posts post : posts) {
+//                   texts.setText(post.getAction() + " " + post.getCityName());
+//
+//
+//                }
+//
+//            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
