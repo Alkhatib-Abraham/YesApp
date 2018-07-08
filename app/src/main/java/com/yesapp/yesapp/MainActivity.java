@@ -94,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
 =======
                 for (Posts post : posts) {
                    texts.setText(post.getAction() + post.getCityName());
+<<<<<<< HEAD
+>>>>>>> parent of 8e95988... fixing some bugs
+=======
 >>>>>>> parent of 8e95988... fixing some bugs
 
 
