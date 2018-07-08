@@ -89,7 +89,12 @@ public class MainActivity extends AppCompatActivity {
         MyCustomAdapter(ArrayList<ListItem> Items ) {
             this.Items=Items;
 
+<<<<<<< HEAD
         }
+=======
+                for (Posts post : posts) {
+                   texts.setText(post.getAction() + post.getCityName());
+>>>>>>> parent of 8e95988... fixing some bugs
 
 
         @Override
