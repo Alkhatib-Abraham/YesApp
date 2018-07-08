@@ -15,12 +15,18 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class Create extends AppCompatActivity {
 
     EditText messageText;
+    EditText phoneText;
+    EditText adressText;
+
     DatabaseReference myRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
          messageText = (EditText) findViewById(R.id.editText);
+        phoneText = (EditText) findViewById(R.id.editText3);
+        adressText = (EditText) findViewById(R.id.editText5);
+
 
     }
 
@@ -28,7 +34,7 @@ public class Create extends AppCompatActivity {
     public void post(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("message");
-        writeNewUser(messageText.getText().toString(), messageText.getText().toString() );
+        writeNewUser(messageText.getText().toString(), messageText.getText().toString());
 
     }
 
