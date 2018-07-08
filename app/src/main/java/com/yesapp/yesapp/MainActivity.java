@@ -45,5 +45,22 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+<<<<<<< HEAD
+=======
+    public void Read(View view) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference posts = database.getReference("posts");
+
+        posts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {});
+
+                List<Posts> posts = new ArrayList<>(results.values());
+
+                for (Posts post : posts) {
+                   texts.setText(post.getAction() + post.getCityName());
+>>>>>>> parent of 8e95988... fixing some bugs
 
 }
