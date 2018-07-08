@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="37dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="City Name"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/button2"
@@ -28,13 +28,6 @@
         android:onClick="post"/>
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="221dp"
-        android:layout_height="195dp"
-        android:layout_centerInParent="true"
-        android:text="TextView" />
-
     <EditText
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
@@ -43,18 +36,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="91dp"
         android:ems="10"
-        android:hint="Phone number"
-        android:inputType="phone" />
-
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="156dp"
-        android:ems="10"
-        android:hint="Adress"
+        android:hint="What do you wanna do"
         android:inputType="text" />
 
 </RelativeLayout>

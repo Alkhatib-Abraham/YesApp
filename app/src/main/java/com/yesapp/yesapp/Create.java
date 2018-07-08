@@ -14,13 +14,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class Create extends AppCompatActivity {
 
-    EditText messageText;
-    EditText phoneText;
-    EditText adressText;
+    EditText cityName;
+    EditText action;
+
+
+
+
 
     DatabaseReference myRef;
     TextView text;
@@ -29,15 +31,23 @@ public class Create extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
-         messageText = (EditText) findViewById(R.id.editText);
-        phoneText = (EditText) findViewById(R.id.editText3);
-        adressText = (EditText) findViewById(R.id.editText5);
+         cityName = (EditText) findViewById(R.id.editText);
+        action = (EditText) findViewById(R.id.editText3);
 
 
     }
 
 
     public void post(View view) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myName = database.getReference("posts");
+
+        Posts post = new Posts();
+        post.setCityName(cityName.getText().toString());
+        post.setAction(action.getText().toString());
+        myName.push().setValue(post);
+
+
 
 
 
