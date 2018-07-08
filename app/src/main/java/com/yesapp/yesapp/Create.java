@@ -24,11 +24,7 @@ public class Create extends AppCompatActivity {
     EditText cityName;
     EditText action;
 
-
-
-
-
-    DatabaseReference myRef;
+DatabaseReference myRef;
     TextView text;
 
     @Override

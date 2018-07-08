@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     class MyCustomAdapter extends BaseAdapter
     {
-        ArrayList<LauncherActivity.ListItem> Items=new ArrayList<LauncherActivity.ListItem>();
+        ArrayList<ListItem> Items= new ArrayList<>();
         MyCustomAdapter(ArrayList<ListItem> Items ) {
             this.Items=Items;
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public String getItem(int position) {
-            return Items.get(position).;
+            return Items.get(position).Name;
 
         }
 
