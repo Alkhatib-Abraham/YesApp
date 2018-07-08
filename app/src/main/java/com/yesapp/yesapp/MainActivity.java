@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
                 for (Posts post : posts) {
 
                     texts.setText(post.getAction() + " " + post.getCityName());
+
                     final   ArrayList<ListItem> Items=new  ArrayList<ListItem> ();
                     Items.add(new ListItem(post.getCityName(),post.getAction()));
-                    Items.add(new ListItem("ahmed","he is ban man"));
-                    Items.add(new ListItem("jasim","he is okey man"));
-                    Items.add(new ListItem("jena","he is well man"));
+
+
                     final MyCustomAdapter myadpter= new MyCustomAdapter(Items);
 
                     ListView ls=(ListView)findViewById(R.id.list);
