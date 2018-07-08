@@ -26,4 +26,11 @@
         android:layout_marginBottom="33dp"
         android:text="Button"
         android:onClick="post"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="221dp"
+        android:layout_height="195dp"
+        android:layout_centerInParent="true"
+        android:text="TextView" />
 </RelativeLayout>
