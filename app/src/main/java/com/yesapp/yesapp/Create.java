@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +31,9 @@ public class Create extends AppCompatActivity {
         myRef = database.getReference("message");
 
         myRef.setValue(messageText.getText().toString());
+
+        Toast.makeText(this, "sent", Toast.LENGTH_SHORT).show();
+
     }
 
     private void writeNewUser(String userId, String name, String email) {
