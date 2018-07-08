@@ -15,6 +15,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class Create extends AppCompatActivity {
 
     EditText messageText;
+    DatabaseReference myRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +27,14 @@ public class Create extends AppCompatActivity {
 
     public void post(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        myRef = database.getReference("message");
 
         myRef.setValue(messageText.getText().toString());
+    }
+
+    private void writeNewUser(String userId, String name, String email) {
+        User user = new User(name, email);
+
+        myRef.child("users").child(userId).setValue(user);
     }
 }
