@@ -38,37 +38,13 @@ public class Create extends AppCompatActivity {
 
 
     public void post(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        myRef = database.getReference("Posts : ");
-        writeNewUser(messageText.getText().toString(), messageText.getText().toString() );
-        text = (TextView) findViewById(R.id.textView2);
 
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                Post post = dataSnapshot.getValue(Post.class);
-                text.setText(post.message);
-                // ...
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                // ...
-            }
-        };
-        myRef.addValueEventListener(postListener);
-
-        myRef = database.getReference("message");
-        writeNewUser(messageText.getText().toString(), messageText.getText().toString());
 
     }
 
     private void writeNewUser(String userId, String message ) {
-        User user = new User(userId, message);
-
-        myRef.child("posts").child(userId).setValue(message);
+ 
     }
+
 }

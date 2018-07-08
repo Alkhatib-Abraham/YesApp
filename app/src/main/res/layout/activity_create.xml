@@ -27,14 +27,14 @@
         android:text="Button"
         android:onClick="post"/>
 
-<<<<<<< HEAD
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="221dp"
         android:layout_height="195dp"
         android:layout_centerInParent="true"
         android:text="TextView" />
-=======
+
     <EditText
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
@@ -57,5 +57,4 @@
         android:hint="Adress"
         android:inputType="text" />
 
->>>>>>> 8856e6bc72aef80156847851cfe6df29853e92bf
 </RelativeLayout>
