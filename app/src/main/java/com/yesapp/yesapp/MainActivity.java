@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 List<Posts> posts = new ArrayList<>(results.values());
 
                 for (Posts post : posts) {
-                   texts.setText(post.getAction());
+                   texts.setText(post.getAction() + post.getCityName());
 
                 }
 
