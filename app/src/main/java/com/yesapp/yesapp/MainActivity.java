@@ -59,7 +59,17 @@ public class MainActivity extends AppCompatActivity {
                 List<Posts> posts = new ArrayList<>(results.values());
 
                 for (Posts post : posts) {
+
                     texts.setText(post.getAction() + " " + post.getCityName());
+                    final   ArrayList<ListItem> Items=new  ArrayList<ListItem> ();
+                    Items.add(new ListItem(post.getCityName(),post.getAction()));
+                    Items.add(new ListItem("ahmed","he is ban man"));
+                    Items.add(new ListItem("jasim","he is okey man"));
+                    Items.add(new ListItem("jena","he is well man"));
+                    final MyCustomAdapter myadpter= new MyCustomAdapter(Items);
+
+                    ListView ls=(ListView)findViewById(R.id.list);
+                    ls.setAdapter(myadpter);
                 }
 
             }
@@ -72,5 +82,46 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    class MyCustomAdapter extends BaseAdapter
+    {
+        ArrayList<ListItem> Items=new ArrayList<ListItem>();
+        MyCustomAdapter(ArrayList<ListItem> Items ) {
+            this.Items=Items;
+
+        }
+
+
+        @Override
+        public int getCount() {
+            return Items.size();
+        }
+
+        @Override
+        public String getItem(int position) {
+            return Items.get(position).Name;
+
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return  position;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            LayoutInflater linflater =getLayoutInflater();
+            View view1=linflater.inflate(R.layout.row_view, null);
+
+            TextView txtname =(TextView) view1.findViewById(R.id.txtcity);
+            TextView txtdes =(TextView) view1.findViewById(R.id.txtaction);
+            txtname.setText(Items.get(i).Name);
+            txtdes.setText(Items.get(i).Desc);
+            return view1;
+
+        }
+
+
+
+    }
 
 }

@@ -51,6 +51,8 @@ DatabaseReference myRef;
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(Create.this, "Post Add Successfully", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(Create.this, MainActivity.class);
+                    startActivity(i);
                 }else {
                     Toast.makeText(Create.this, "Error : post not add 🙁 ", Toast.LENGTH_SHORT).show();
                 }
