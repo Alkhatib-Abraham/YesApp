@@ -32,11 +32,13 @@ public class MainActivity extends AppCompatActivity {
     TextView texts;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         texts = (TextView) findViewById(R.id.textView);
 
+<<<<<<< HEAD
+=======
         final   ArrayList<ListItem> Items = new  ArrayList<ListItem> ();
         Items.add(new ListItem("hussien","he is good man"));
         Items.add(new ListItem("ahmed","he is ban man"));
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         ls.setAdapter(myadpter);
 
 
+>>>>>>> fea668ff5ba5bd077b97dfe8f281cabdb64f6ca8
     }
 
     public void gotocreate(View view) {
@@ -55,6 +58,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+<<<<<<< HEAD
+    public void Read(View view) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference posts = database.getReference("posts");
+
+        posts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Post>>() {});
+
+                List<Posts> posts = new ArrayList<>(results.values());
+
+                for (Posts post : posts) {
+                    texts.setText(post.getAction() + " " + post.getCityName());
+                }
+
+            }
+=======
 //    public void Read(View view) {
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //        DatabaseReference posts = database.getReference("posts");
@@ -75,12 +97,15 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //
 //            }
+>>>>>>> fea668ff5ba5bd077b97dfe8f281cabdb64f6ca8
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
+<<<<<<< HEAD
+=======
     }
 
     class MyCustomAdapter extends BaseAdapter
@@ -128,8 +153,9 @@ public class MainActivity extends AppCompatActivity {
             return view1;
 
         }
-
-
+>>>>>>> fea668ff5ba5bd077b97dfe8f281cabdb64f6ca8
 
     }
+
+
 }
