@@ -28,6 +28,14 @@
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="49dp" />
 
+    <EditText
+        android:id="@+id/h"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Your Name"
+        android:inputType="textPersonName" />
+
     <Button
         android:id="@+id/Registerbtn"
         android:layout_width="273dp"
