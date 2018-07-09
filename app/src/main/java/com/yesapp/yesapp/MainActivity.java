@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         texts = (TextView) findViewById(R.id.textView);
-
-
     }
 
     public void gotocreate(View view) {
@@ -58,24 +56,33 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {});
+                HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {
+                });
 
                 List<Posts> posts = new ArrayList<>(results.values());
+
+
+
+
+
+
+                final ArrayList<ListItem> Items = new ArrayList<ListItem>();
 
                 for (Posts post : posts) {
 
 
-                    final   ArrayList<ListItem> Items=new  ArrayList<ListItem> ();
-                    Items.add(new ListItem(post.getCityName(),post.getAction()));
+                    Items.add(new ListItem(post.getCityName(), post.getAction()));
 
 
-                    final MyCustomAdapter myadpter= new MyCustomAdapter(Items);
+                    final MyCustomAdapter myadpter = new MyCustomAdapter(Items);
 
-                    ListView ls=(ListView)findViewById(R.id.list);
+                    ListView ls = (ListView) findViewById(R.id.list);
                     ls.setAdapter(myadpter);
                 }
 
             }
+
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -87,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     class MyCustomAdapter extends BaseAdapter
     {
-        ArrayList<ListItem> Items=new ArrayList<ListItem>();
+        ArrayList<ListItem> Items= new ArrayList<ListItem>();
         MyCustomAdapter(ArrayList<ListItem> Items ) {
             this.Items=Items;
 
