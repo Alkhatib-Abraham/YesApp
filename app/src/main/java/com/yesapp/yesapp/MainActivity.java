@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         posts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue()!=null) {
 
                 HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {
                 });
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     ls.setAdapter(myadpter);
                 }
 
-            }
+            }}
 
 
 
