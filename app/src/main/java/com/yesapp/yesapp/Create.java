@@ -45,7 +45,7 @@ DatabaseReference myRef;
         Posts post = new Posts();
         post.setCityName(cityName.getText().toString());
         post.setAction(action.getText().toString());
-        myName.push().setValue(post);
+
         myName.push().setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
