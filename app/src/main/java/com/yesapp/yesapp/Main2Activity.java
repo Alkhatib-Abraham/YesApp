@@ -19,6 +19,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class Main2Activity extends AppCompatActivity {
 
 
+    static String s;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,14 @@ public class Main2Activity extends AppCompatActivity {
 
         String email1 = email.getText().toString();
         String password1 = password.getText().toString();
+
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(name.getText().toString()).build();
 
-        String s =profileUpdates.getDisplayName();
+        s =profileUpdates.getDisplayName();
+        Toast.makeText(Main2Activity.this,s, Toast.LENGTH_SHORT).show();
+
+        Posts p = new Posts();
         Log.e("Test",s);
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email1 , password1).addOnCompleteListener(new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
