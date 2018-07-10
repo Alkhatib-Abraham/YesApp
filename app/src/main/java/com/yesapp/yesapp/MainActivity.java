@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 for (Posts post : posts) {
 
 
-                    Items.add(new ListItem(post.getCityName(), post.getAction()));
+                    Items.add(new ListItem(post.getCityName(), post.getAction(),post.getName()));
 
 
                     final MyCustomAdapter myadpter = new MyCustomAdapter(Items);
@@ -121,8 +121,10 @@ public class MainActivity extends AppCompatActivity {
 
             TextView txtname =(TextView) view1.findViewById(R.id.txtcity);
             TextView txtdes =(TextView) view1.findViewById(R.id.txtaction);
+            TextView txtuser =(TextView) view1.findViewById(R.id.txtuser);
             txtname.setText(Items.get(i).Name);
             txtdes.setText(Items.get(i).Desc);
+            txtuser.setText(Items.get(i).User);
             return view1;
 
         }

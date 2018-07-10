@@ -36,6 +36,7 @@ DatabaseReference myRef;
         action = (EditText) findViewById(R.id.action);
 
 
+
     }
 
 

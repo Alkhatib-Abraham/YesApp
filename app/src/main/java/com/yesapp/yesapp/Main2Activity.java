@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -45,9 +46,15 @@ public class Main2Activity extends AppCompatActivity {
 
         String email1 = email.getText().toString();
         String password1 = password.getText().toString();
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name.getText().toString()).build();
 
+        String s =profileUpdates.getDisplayName();
+        Log.e("Test",s);
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email1 , password1).addOnCompleteListener(new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
+
+
             @Override
             public void onComplete(@NonNull Task<com.google.firebase.auth.AuthResult> task) {
                 if (task.isSuccessful()) {
