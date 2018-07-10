@@ -28,30 +28,31 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+// This is to read data from a database and place it in a list view
 public class MainActivity extends AppCompatActivity {
 
-    TextView texts;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        texts = (TextView) findViewById(R.id.textView);
-    }
 
+    }
+//=====================================================================================================
+// this function triggerd when user presses the go to create button  to post posts in the database
     public void gotocreate(View view) {
         Intent i = new Intent(MainActivity.this, Create.class);
         startActivity(i);
     }
+//=====================================================================================================
 
 
+//=====================================================================================================
+// this method is to get data from the database and put it in a listview
     public void Read(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference posts = database.getReference("posts");
-        FirebaseUser use1r = FirebaseAuth.getInstance().getCurrentUser();
-        String usernow = use1r.getDisplayName();
-        
+// add posts to a listview
         posts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -59,14 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                 HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {
                 });
-
                 List<Posts> posts = new ArrayList<>(results.values());
-
-
-
-
-
-
                 final ArrayList<ListItem> Items = new ArrayList<ListItem>();
 
                 for (Posts post : posts) {
@@ -82,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }}
-
+//=====================================================================================================
 
 
             @Override
@@ -93,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+
     class MyCustomAdapter extends BaseAdapter
     {
         ArrayList<ListItem> Items= new ArrayList<ListItem>();
@@ -100,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             this.Items=Items;
 
         }
-
 
         @Override
         public int getCount() {

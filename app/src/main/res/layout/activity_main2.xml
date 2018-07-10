@@ -9,7 +9,7 @@
     tools:context=".Main2Activity">
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/Register_Email"
         android:layout_width="373dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteY="3dp" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/Register_Password"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -29,7 +29,7 @@
         tools:layout_editor_absoluteY="49dp" />
 
     <EditText
-        android:id="@+id/h"
+        android:id="@+id/Register_User"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

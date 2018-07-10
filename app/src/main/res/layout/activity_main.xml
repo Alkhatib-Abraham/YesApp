@@ -8,34 +8,23 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="21dp"
-        android:text="go to creat activity"
-        android:onClick="gotocreate"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginTop="343dp"
-        android:text="TextView"
-        android:textSize="24sp" />
+        android:onClick="gotocreate"
+        android:text="go to creat activity" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
+        android:id="@+id/Refresh_btn"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="85dp"
-        android:text="Button"
-        android:onClick="Read"/>
+        android:onClick="Read"
+        android:text="Refresh" />
 
     <ListView
         android:id="@+id/list"

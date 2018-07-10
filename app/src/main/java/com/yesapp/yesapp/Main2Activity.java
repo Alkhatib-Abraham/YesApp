@@ -14,10 +14,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+// This is the register Activity
 public class Main2Activity extends AppCompatActivity {
 
 
-    EditText name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,21 +25,33 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+// this function will be triggerd when users presses the register button, and putting his details into the database
+
     public void register(View view) {
-        EditText email =    (EditText) findViewById(R.id.email);
-        EditText password = (EditText) findViewById(R.id.password);
-        name = (EditText) findViewById(R.id.h);
+        EditText email =    (EditText) findViewById(R.id.Register_Email);
+        EditText password = (EditText) findViewById(R.id.Register_Password);
+        EditText name = (EditText) findViewById(R.id.Register_User);
+
         String email1 = email.getText().toString();
         String password1 = password.getText().toString();
+
+
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email1 , password1).addOnCompleteListener(new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<com.google.firebase.auth.AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(Main2Activity.this, "Succesful", Toast.LENGTH_SHORT).show();
-                    FirebaseUser user = task.getResult().getUser();
-                    UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(name.getText().toString())
-                            .build();
                     startActivity(new Intent(Main2Activity.this, login.class));
 
                 } else {
@@ -52,6 +64,7 @@ public class Main2Activity extends AppCompatActivity {
                     Toast.makeText(Main2Activity.this, "Failed", Toast.LENGTH_SHORT).show();
 
                 }
+
             }
         });
 

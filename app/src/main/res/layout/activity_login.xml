@@ -30,7 +30,7 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="196dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="login"
         android:text="Login"
@@ -39,7 +39,7 @@
 
     <Button
         android:id="@+id/re"
-        android:layout_width="199dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="re"
         android:text="Register"

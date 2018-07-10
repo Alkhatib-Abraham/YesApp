@@ -7,7 +7,7 @@
     tools:context=".Create">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/cityname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,18 +18,18 @@
         android:inputType="text" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/post_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="33dp"
-        android:text="Button"
-        android:onClick="post"/>
+        android:onClick="post"
+        android:text="Post" />
 
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -38,5 +38,14 @@
         android:ems="10"
         android:hint="What do you wanna do"
         android:inputType="text" />
+
+    <Button
+        android:id="@+id/sign_out"
+        android:onClick="sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/post_btn"
+        android:layout_centerHorizontal="true"
+        android:text="sign_out" />
 
 </RelativeLayout>

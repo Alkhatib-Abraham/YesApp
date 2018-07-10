@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,8 +32,8 @@ DatabaseReference myRef;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
-        cityName = (EditText) findViewById(R.id.editText);
-        action = (EditText) findViewById(R.id.editText3);
+        cityName = (EditText) findViewById(R.id.cityname);
+        action = (EditText) findViewById(R.id.action);
 
 
     }
@@ -50,6 +51,7 @@ DatabaseReference myRef;
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
+
                     Toast.makeText(Create.this, "Post Add Successfully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Create.this, MainActivity.class);
                     startActivity(i);
@@ -64,8 +66,12 @@ DatabaseReference myRef;
 
     }
 
-    private void writeNewUser(String userId, String message ) {
- 
-    }
 
+    public void sign_out(View view) {
+        FirebaseAuth.getInstance().signOut();
+        login.sp.edit().putBoolean("logged", false).apply();
+        Intent b = new Intent(Create.this, login.class);
+        startActivity(b);
+
+    }
 }

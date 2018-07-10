@@ -16,57 +16,65 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+/// This is Sign in and MainActivity for this project
+// If the user does not have an account he can register by going to register activity which is Main2Activity
 public class login extends AppCompatActivity {
-    //for saving the login data
+
+    static SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        sp = getSharedPreferences("login",MODE_PRIVATE);
 
-        if(sp.getBoolean("logged",false)){
+        sp = getSharedPreferences("login", MODE_PRIVATE);
+        if (sp.getBoolean("logged", false)) {
             startActivity(new Intent(login.this, MainActivity.class));
         }
+
     }
 
 
-    SharedPreferences sp;
 
+// This function is triggered when the user presses a log in button
+
+
+    //=======================================================================================================================================================
+    // this function will be luanched when user press the register button
+    public void re(View view) {
+        startActivity(new Intent(login.this, Main2Activity.class));
+
+    }
+//=======================================================================================================================================================
 
 
     public void login(View view) {
 
-
-
-        EditText email2 =    (EditText) findViewById(R.id.edit1);
+//=======================================================================================================================================================
+// These EditTexts are used when the user places his / her email and password and makes sure that his information is taken into the database
+        EditText email2 = (EditText) findViewById(R.id.edit1);
         EditText password2 = (EditText) findViewById(R.id.edit2);
         String email3 = email2.getText().toString();
         String password3 = password2.getText().toString();
+
         //to save the logindata
-        sp.edit().putString("name",email3).apply();
-        sp.edit().putString("password",password3).apply();
+        sp.edit().putString("name", email3).apply();
+        sp.edit().putString("password", password3).apply();
 
-
+// This function is triggered to let the user sign in with his details
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email3, password3).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-              if(task.isSuccessful()){
-                  sp.edit().putBoolean("logged",true).apply();
+                if (task.isSuccessful()) {
+                    sp.edit().putBoolean("logged", true).apply();
 
-                  startActivity(new Intent(login.this, MainActivity.class));
-              }else{
-                  Toast.makeText(login.this , "password or email is not correct please dont try again", Toast.LENGTH_SHORT ).show();
-              }
+                    startActivity(new Intent(login.this, MainActivity.class));
+                } else {
+                    Toast.makeText(login.this, "password or email is not correct please dont try again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-
-
-    }
-
-    public void re(View view) {
-        startActivity(new Intent(login.this, Main2Activity.class));
+//=======================================================================================================================================================
 
     }
 }
