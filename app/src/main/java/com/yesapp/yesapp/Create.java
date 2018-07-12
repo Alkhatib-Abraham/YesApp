@@ -1,6 +1,8 @@
 package com.yesapp.yesapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,8 +28,7 @@ public class Create extends AppCompatActivity {
 
     EditText cityName;
     EditText action;
-
-DatabaseReference myRef;
+    DatabaseReference myRef;
     TextView text;
 
     @Override
@@ -47,7 +50,9 @@ DatabaseReference myRef;
         Posts post = new Posts();
         post.setCityName(cityName.getText().toString());
         post.setAction(action.getText().toString());
-        post.setName(Main2Activity.s);
+
+        post.setName(login.sp.getString("name","no name found"));
+
         myName.push().setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

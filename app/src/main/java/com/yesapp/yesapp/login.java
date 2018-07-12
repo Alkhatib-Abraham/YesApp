@@ -2,6 +2,7 @@ package com.yesapp.yesapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,9 +19,10 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 /// This is Sign in and MainActivity for this project
 // If the user does not have an account he can register by going to register activity which is Main2Activity
+// also.. already loged in users get automatically to the app
 public class login extends AppCompatActivity {
 
-    static SharedPreferences sp;
+   public static SharedPreferences sp;//to save if the user has been logged in
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,20 @@ public class login extends AppCompatActivity {
 
         sp = getSharedPreferences("login", MODE_PRIVATE);
         if (sp.getBoolean("logged", false)) {
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(sp.getString("name", ""),
+                    sp.getString("password","")).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+
+                        startActivity(new Intent(login.this, MainActivity.class));
+                    } else {
+                        Toast.makeText(login.this, "password or email is not correct please dont try again", Toast.LENGTH_SHORT).show();
+                        sp.edit().putBoolean("logged", false).apply();
+
+                    }
+                }
+            });
             startActivity(new Intent(login.this, MainActivity.class));
         }
 

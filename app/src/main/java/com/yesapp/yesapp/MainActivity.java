@@ -38,64 +38,67 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
     }
+
 //=====================================================================================================
-// this function triggerd when user presses the go to create button  to post posts in the database
+// this function triggeres when user presses the go to create button  to post posts in the database
     public void gotocreate(View view) {
         Intent i = new Intent(MainActivity.this, Create.class);
         startActivity(i);
     }
-//=====================================================================================================
-
 
 //=====================================================================================================
 // this method is to get data from the database and put it in a listview
     public void Read(View view) {
+        //necessary References
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference posts = database.getReference("posts");
-// add posts to a listview
+
+        // Pull the posts from the cloud and put them in a listView
         posts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue()!=null) {
 
+                //pulls from the cloud
                 HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {
                 });
                 List<Posts> posts = new ArrayList<>(results.values());
+                //defines an Arraylist
                 final ArrayList<ListItem> Items = new ArrayList<ListItem>();
+                 // iterates through the posts and put them in the Adapter
 
                 for (Posts post : posts) {
-
-
+                    //add a new post to the arrayList with help of the posts class
                     Items.add(new ListItem(post.getCityName(), post.getAction(),post.getName()));
 
-
+                    // transfers the ListArray into the ListView with the CustomAdapter
                     final MyCustomAdapter myadpter = new MyCustomAdapter(Items);
-
                     ListView ls = (ListView) findViewById(R.id.list);
                     ls.setAdapter(myadpter);
                 }
 
-            }}
-//=====================================================================================================
-
+            }}//end of the add On DataChange listener
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
-
-    }
+        }); //end of the Database.addValueEventListener
 
 
+    }// end of the Method Read
+
+    //==============================================================================================
 
 
     class MyCustomAdapter extends BaseAdapter
+        //this class defines how the ViewItems of the Arraylist are inflated
     {
         ArrayList<ListItem> Items= new ArrayList<ListItem>();
+
+
         MyCustomAdapter(ArrayList<ListItem> Items ) {
             this.Items=Items;
-
         }
 
         @Override
@@ -106,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public String getItem(int position) {
             return Items.get(position).Name;
-
         }
 
         @Override
@@ -116,21 +118,19 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            LayoutInflater linflater =getLayoutInflater();
+            LayoutInflater linflater = getLayoutInflater();
             View view1=linflater.inflate(R.layout.row_view, null);
-
+            //the Textviews which are used to present the data
             TextView txtname =(TextView) view1.findViewById(R.id.txtcity);
             TextView txtdes =(TextView) view1.findViewById(R.id.txtaction);
             TextView txtuser =(TextView) view1.findViewById(R.id.txtuser);
+
+            //get the data from Items and put it in the right places
             txtname.setText(Items.get(i).Name);
             txtdes.setText(Items.get(i).Desc);
             txtuser.setText(Items.get(i).User);
             return view1;
 
         }
-
-
-
     }
-
 }
