@@ -51,7 +51,10 @@ public class Create extends AppCompatActivity {
         post.setCityName(cityName.getText().toString());
         post.setAction(action.getText().toString());
 
-        post.setName(login.sp.getString("name","no name found"));
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        post.setName(user.getDisplayName());
 
         myName.push().setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

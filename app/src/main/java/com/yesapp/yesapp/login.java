@@ -29,6 +29,9 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         sp = getSharedPreferences("login", MODE_PRIVATE);
         if (sp.getBoolean("logged", false)) {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(sp.getString("name", ""),
