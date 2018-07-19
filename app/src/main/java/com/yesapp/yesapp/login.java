@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,11 +25,13 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class login extends AppCompatActivity {
 
    public static SharedPreferences sp;//to save if the user has been logged in
-
+      ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+         progressBar.setVisibility(View.INVISIBLE);
 
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
@@ -37,6 +40,8 @@ public class login extends AppCompatActivity {
         if (sp.getBoolean("logged", false)) {
             Button loginBtn = (Button) findViewById(R.id.login);
             Button regBtn = (Button) findViewById(R.id.re);
+             progressBar.setVisibility(View.VISIBLE);
+
               loginBtn.setEnabled(false);
                regBtn.setEnabled(false);
 
@@ -49,6 +54,8 @@ public class login extends AppCompatActivity {
                         startActivity(new Intent(login.this, MainActivity.class));
                         finish();
                     } else {
+                        progressBar.setVisibility(View.INVISIBLE);
+
                         Toast.makeText(login.this, "password or email is not correct please dont try again", Toast.LENGTH_SHORT).show();
                         sp.edit().putBoolean("logged", false).apply();
 
@@ -76,6 +83,7 @@ public class login extends AppCompatActivity {
 
     public void login(View view) {
 
+        progressBar.setVisibility(View.VISIBLE);
 
 //=======================================================================================================================================================
 // These EditTexts are used when the user places his / her email and password and makes sure that his information is taken into the database
@@ -103,6 +111,7 @@ public class login extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(login.this, "password or email is not correct please dont try again", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.INVISIBLE);
                     loginBtn.setEnabled(true);
                     regBtn.setEnabled(true);
                 }

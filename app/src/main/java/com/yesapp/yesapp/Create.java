@@ -41,6 +41,12 @@ public class Create extends AppCompatActivity {
 
 
     }
+    //to prevent going back here while trying to exit the app
+    @Override
+    public void onBackPressed() {
+        finish();
+            super.onBackPressed();
+        }
 
 
     public void post(View view) {
