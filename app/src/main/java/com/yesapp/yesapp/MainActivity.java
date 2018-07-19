@@ -36,7 +36,8 @@ private int onBackPressed = 0;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Refresh();
+        
     }
 
 //=====================================================================================================
@@ -49,42 +50,8 @@ private int onBackPressed = 0;
 //=====================================================================================================
 // this method is to get data from the database and put it in a listview
     public void Read(View view) {
-        //necessary References
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference posts = database.getReference("posts");
 
-        // Pull the posts from the cloud and put them in a listView
-        posts.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue()!=null) {
-
-                //pulls from the cloud
-                HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {
-                });
-                List<Posts> posts = new ArrayList<>(results.values());
-                //defines an Arraylist
-                final ArrayList<ListItem> Items = new ArrayList<ListItem>();
-                 // iterates through the posts and put them in the Adapter
-
-                for (Posts post : posts) {
-                    //add a new post to the arrayList with help of the posts class
-                    Items.add(new ListItem(post.getCityName(), post.getAction(),post.getName()));
-
-                    // transfers the ListArray into the ListView with the CustomAdapter
-                    final MyCustomAdapter myadpter = new MyCustomAdapter(Items);
-                    ListView ls = (ListView) findViewById(R.id.list);
-                    ls.setAdapter(myadpter);
-                }
-
-            }}//end of the add On DataChange listener
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        }); //end of the Database.addValueEventListener
-
+        Refresh();
 
     }// end of the Method Read
 
@@ -99,6 +66,45 @@ private int onBackPressed = 0;
             super.onBackPressed();
         }
         onBackPressed ++;
+
+    }
+    public void Refresh(){
+        //necessary References
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference posts = database.getReference("posts");
+
+        // Pull the posts from the cloud and put them in a listView
+        posts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue()!=null) {
+
+                    //pulls from the cloud
+                    HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {
+                    });
+                    List<Posts> posts = new ArrayList<>(results.values());
+                    //defines an Arraylist
+                    final ArrayList<ListItem> Items = new ArrayList<ListItem>();
+                    // iterates through the posts and put them in the Adapter
+
+                    for (Posts post : posts) {
+                        //add a new post to the arrayList with help of the posts class
+                        Items.add(new ListItem(post.getCityName(), post.getAction(),post.getName()));
+
+                        // transfers the ListArray into the ListView with the CustomAdapter
+                        final MyCustomAdapter myadpter = new MyCustomAdapter(Items);
+                        ListView ls = (ListView) findViewById(R.id.list);
+                        ls.setAdapter(myadpter);
+                    }
+
+                }}//end of the add On DataChange listener
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        }); //end of the Database.addValueEventListener
+
 
     }
 
