@@ -45,6 +45,7 @@ private int onBackPressed = 0;
     public void gotocreate(View view) {
         Intent i = new Intent(MainActivity.this, Create.class);
         startActivity(i);
+        finish();
     }
 
 //=====================================================================================================
