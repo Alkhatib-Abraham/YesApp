@@ -62,7 +62,6 @@ public class login extends AppCompatActivity {
                     }
                 }
             });
-           // startActivity(new Intent(login.this, MainActivity.class)); test remove
         }
 
     }
@@ -96,7 +95,7 @@ public class login extends AppCompatActivity {
         String email3 = email2.getText().toString();
         String password3 = password2.getText().toString();
 
-        //to save the logindata
+        //to save the loginData
         sp.edit().putString("name", email3).apply();
         sp.edit().putString("password", password3).apply();
 
