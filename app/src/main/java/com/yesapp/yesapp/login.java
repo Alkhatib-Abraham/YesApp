@@ -41,6 +41,7 @@ public class login extends AppCompatActivity {
                     if (task.isSuccessful()) {
 
                         startActivity(new Intent(login.this, MainActivity.class));
+                        finish();
                     } else {
                         Toast.makeText(login.this, "password or email is not correct please dont try again", Toast.LENGTH_SHORT).show();
                         sp.edit().putBoolean("logged", false).apply();
@@ -48,7 +49,7 @@ public class login extends AppCompatActivity {
                     }
                 }
             });
-            startActivity(new Intent(login.this, MainActivity.class));
+           // startActivity(new Intent(login.this, MainActivity.class)); test remove
         }
 
     }

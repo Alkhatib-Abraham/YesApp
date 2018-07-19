@@ -31,7 +31,7 @@ import java.util.List;
 // This is to read data from a database and place it in a list view
 public class MainActivity extends AppCompatActivity {
 
-
+private int onBackPressed = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +87,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     }// end of the Method Read
+
+
+
+    @Override
+    public void onBackPressed() {
+
+        Toast.makeText(this, "Press Back again to Exit",Toast.LENGTH_SHORT).show();
+        if(onBackPressed==1){
+            onBackPressed =0;
+            super.onBackPressed();
+        }
+        onBackPressed ++;
+
+    }
 
     //==============================================================================================
 

@@ -64,6 +64,7 @@ public class Create extends AppCompatActivity {
                     Toast.makeText(Create.this, "Post Add Successfully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Create.this, MainActivity.class);
                     startActivity(i);
+                    finish();
                 }else {
                     Toast.makeText(Create.this, "Error : post not add 🙁 ", Toast.LENGTH_SHORT).show();
                 }
