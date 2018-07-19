@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -34,6 +35,11 @@ public class login extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         sp = getSharedPreferences("login", MODE_PRIVATE);
         if (sp.getBoolean("logged", false)) {
+            Button loginBtn = (Button) findViewById(R.id.login);
+            Button regBtn = (Button) findViewById(R.id.re);
+              loginBtn.setEnabled(false);
+               regBtn.setEnabled(false);
+
             FirebaseAuth.getInstance().signInWithEmailAndPassword(sp.getString("name", ""),
                     sp.getString("password","")).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -70,8 +76,13 @@ public class login extends AppCompatActivity {
 
     public void login(View view) {
 
+
 //=======================================================================================================================================================
 // These EditTexts are used when the user places his / her email and password and makes sure that his information is taken into the database
+        final Button loginBtn = (Button) findViewById(R.id.login);
+        final Button regBtn = (Button) findViewById(R.id.re);
+        loginBtn.setEnabled(false);
+        regBtn.setEnabled(false);
         EditText email2 = (EditText) findViewById(R.id.edit1);
         EditText password2 = (EditText) findViewById(R.id.edit2);
         String email3 = email2.getText().toString();
@@ -92,6 +103,8 @@ public class login extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(login.this, "password or email is not correct please dont try again", Toast.LENGTH_SHORT).show();
+                    loginBtn.setEnabled(true);
+                    regBtn.setEnabled(true);
                 }
             }
         });

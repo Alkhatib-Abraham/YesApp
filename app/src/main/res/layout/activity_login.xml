@@ -45,4 +45,10 @@
         android:text="Register"
         tools:layout_editor_absoluteX="102dp"
         tools:layout_editor_absoluteY="249dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
