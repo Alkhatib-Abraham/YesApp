@@ -88,6 +88,7 @@ public class login extends AppCompatActivity {
                     sp.edit().putBoolean("logged", true).apply();
 
                     startActivity(new Intent(login.this, MainActivity.class));
+                    finish();
                 } else {
                     Toast.makeText(login.this, "password or email is not correct please dont try again", Toast.LENGTH_SHORT).show();
                 }
