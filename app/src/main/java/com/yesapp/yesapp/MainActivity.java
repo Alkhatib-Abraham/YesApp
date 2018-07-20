@@ -65,12 +65,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 //=====================================================================================================
-// this method is to get data from the database and put it in a listview
-    public void Read(View view) {
 
-        Refresh();
-
-    }// end of the Method Read
 
 
 
