@@ -44,8 +44,9 @@ public class Create extends AppCompatActivity {
     //to prevent going back here while trying to exit the app
     @Override
     public void onBackPressed() {
+        Intent i = new Intent(Create.this, MainActivity.class);
+        startActivity(i);
         finish();
-            super.onBackPressed();
         }
 
 
