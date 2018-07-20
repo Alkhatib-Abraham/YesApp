@@ -3,6 +3,7 @@ package com.yesapp.yesapp;
 import android.app.LauncherActivity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,16 +32,31 @@ import java.util.List;
 // This is to read data from a database and place it in a list view
 public class MainActivity extends AppCompatActivity {
 
-private int onBackPressed = 0;
+    SwipeRefreshLayout swipeRefreshLayout;
+    private int onBackPressed = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+
         Refresh();
-        
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Refresh();
+
+            }
+        });
+
     }
 
-//=====================================================================================================
+
+
+
+
+    //=====================================================================================================
 // this function triggeres when user presses the go to create button  to post posts in the database
     public void gotocreate(View view) {
         Intent i = new Intent(MainActivity.this, Create.class);
@@ -105,7 +121,8 @@ private int onBackPressed = 0;
 
             }
         }); //end of the Database.addValueEventListener
-
+      Toast.makeText(MainActivity.this,"Refreshed",Toast.LENGTH_SHORT).show();
+    swipeRefreshLayout.setRefreshing(false); //stop refreshing
 
     }
 
