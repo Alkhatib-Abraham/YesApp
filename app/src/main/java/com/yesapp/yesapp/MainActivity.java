@@ -109,6 +109,11 @@ private int onBackPressed = 0;
 
     }
 
+    public void goToSettings(View view) {
+        Intent intent = new Intent(MainActivity.this,Settings.class);
+        startActivity(intent);
+    }
+
     //==============================================================================================
 
 
