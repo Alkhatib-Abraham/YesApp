@@ -1,5 +1,6 @@
 package com.yesapp.yesapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -81,6 +82,15 @@ public class Settings extends AppCompatActivity {
             changeNameBtn.setVisibility(View.GONE);
             newNameText.setVisibility(View.GONE);
         }
+    }
+
+    public void sign_out(View view) {
+        FirebaseAuth.getInstance().signOut();
+        login.sp.edit().putBoolean("logged", false).apply();
+        Intent b = new Intent(Settings.this, login.class);
+        startActivity(b);
+        finish();
+
     }
 }
 

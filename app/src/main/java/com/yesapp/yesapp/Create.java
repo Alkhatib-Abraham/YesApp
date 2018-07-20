@@ -84,11 +84,5 @@ public class Create extends AppCompatActivity {
     }
 
 
-    public void sign_out(View view) {
-        FirebaseAuth.getInstance().signOut();
-        login.sp.edit().putBoolean("logged", false).apply();
-        Intent b = new Intent(Create.this, login.class);
-        startActivity(b);
 
-    }
 }

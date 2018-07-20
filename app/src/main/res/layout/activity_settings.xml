@@ -84,7 +84,16 @@
             android:onClick="changeName"
             android:text="Change"
             android:textSize="15sp" />
+
     </LinearLayout>
+    <Button
+        android:id="@+id/sign_out"
+        android:onClick="sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/post_btn"
+        android:layout_centerHorizontal="true"
+        android:text="sign_out" />
 
 
 
