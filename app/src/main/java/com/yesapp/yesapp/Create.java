@@ -50,38 +50,40 @@ public class Create extends AppCompatActivity {
 
 
     public void post(View view) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myName = database.getReference("posts");
+        if (!cityName.getText().toString().equals("") && !action.getText().toString().equals("")) {//to check that the user wrote something
 
-        Posts post = new Posts();
-        post.setCityName(cityName.getText().toString());
-        post.setAction(action.getText().toString());
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myName = database.getReference("posts");
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            Posts post = new Posts();
+            post.setCityName(cityName.getText().toString());
+            post.setAction(action.getText().toString());
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        post.setName(user.getDisplayName());
+            post.setName(user.getDisplayName());
 
-        myName.push().setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
+            myName.push().setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
 
-                    Toast.makeText(Create.this, "Post Add Successfully", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Create.this, MainActivity.class);
-                    startActivity(i);
-                    finish();
-                }else {
-                    Toast.makeText(Create.this, "Error : post not add 🙁 ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Create.this, "Post Add Successfully", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(Create.this, MainActivity.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        Toast.makeText(Create.this, "Error : post not add 🙁 ", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
 
 
+        }//end of if
+        else {
+            Toast.makeText(Create.this, "Error : post not add 🙁 ", Toast.LENGTH_SHORT).show();
 
-
+        }
     }
-
-
-
 }
