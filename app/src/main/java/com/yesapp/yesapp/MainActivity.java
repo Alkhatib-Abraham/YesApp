@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
 
-        Refresh();
+
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -52,16 +52,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
+    @Override
+    protected void onResume() {
+       Refresh();
+        super.onResume();
+    }
 
     //=====================================================================================================
 // this function triggeres when user presses the go to create button  to post posts in the database
     public void gotocreate(View view) {
         Intent i = new Intent(MainActivity.this, Create.class);
         startActivity(i);
-        finish();
     }
 
 //=====================================================================================================
