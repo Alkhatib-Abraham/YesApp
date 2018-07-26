@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -45,7 +46,20 @@ public class Main2Activity extends AppCompatActivity {
         String password1 = password.getText().toString().trim();
         usersname = name.getText().toString().trim();
 
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email1).matches()) {
+            email.setText("Not an Email!");
+            return;
+        }
 
+        if (usersname.equals("")) {
+            name.setText("Please Enter a name!");
+            return;
+        }
+
+        if (password1.length() < 6) {
+          password.setText("Password should be at least 6 digits long! ");
+            return;
+        }
 
 
 
