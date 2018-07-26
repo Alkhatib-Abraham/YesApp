@@ -47,18 +47,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtcity"
+        android:id="@+id/txtaction"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_gravity="left"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
         android:paddingLeft="16dp"
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/txtaction" />
+        app:layout_constraintStart_toStartOf="@+id/txtcity"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
 
     <TextView
@@ -73,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/txtaction"
+        android:id="@+id/txtcity"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_gravity="left"
