@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 // also.. already loged in users get automatically to the app
 public class login extends AppCompatActivity {
 
+    TextView msg1,msg2;
    public static SharedPreferences sp;//to save if the user has been logged in
       ProgressBar progressBar;
     @Override
@@ -32,6 +34,12 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
          progressBar.setVisibility(View.INVISIBLE);
+        msg1 = (TextView) findViewById(R.id.textView9);
+        msg2 = (TextView) findViewById(R.id.textView10);
+        msg1.setVisibility(View.GONE);
+        msg2.setVisibility(View.GONE);
+
+
 
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
@@ -81,8 +89,11 @@ public class login extends AppCompatActivity {
 
 
     public void login(View view) {
-
+        msg1.setVisibility(View.GONE);
+        msg2.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+
+
 
 //=======================================================================================================================================================
 // These EditTexts are used when the user places his / her email and password and makes sure that his information is taken into the database
@@ -94,6 +105,30 @@ public class login extends AppCompatActivity {
         EditText password2 = (EditText) findViewById(R.id.edit2);
         String email3 = email2.getText().toString();
         String password3 = password2.getText().toString();
+
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email3).matches()) {
+            msg1.setVisibility(View.VISIBLE);
+
+            if(password3.length() < 6){
+                msg2.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
+                loginBtn.setEnabled(true);
+                regBtn.setEnabled(true);
+                return;
+            }
+            progressBar.setVisibility(View.INVISIBLE);
+            loginBtn.setEnabled(true);
+            regBtn.setEnabled(true);
+            return;
+        }
+        else if(password3.length() < 6){
+            msg2.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
+            loginBtn.setEnabled(true);
+            regBtn.setEnabled(true);
+            return;
+        }
 
         //to save the loginData
         sp.edit().putString("name", email3).apply();

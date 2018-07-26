@@ -18,6 +18,13 @@
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="5dp" />
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invalid Email, Please try again"
+        android:textColor="@android:color/holo_red_dark" />
+
     <EditText
         android:id="@+id/edit2"
         android:layout_width="358dp"
@@ -28,6 +35,13 @@
         android:password="true"
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="51dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password must be at least 6 digits"
+        android:textColor="@android:color/holo_red_dark" />
 
     <Button
         android:id="@+id/login"
