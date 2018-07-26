@@ -18,6 +18,13 @@
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="3dp" />
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invalid Email, Please try again"
+        android:textColor="@android:color/holo_red_dark" />
+
     <EditText
         android:id="@+id/Register_Password"
         android:layout_width="370dp"
@@ -29,6 +36,13 @@
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="49dp" />
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password must be at least 6 digits"
+        android:textColor="@android:color/holo_red_dark" />
+
     <EditText
         android:id="@+id/Register_User"
         android:layout_width="match_parent"
@@ -36,6 +50,13 @@
         android:ems="10"
         android:hint="Your Name"
         android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please Enter a Name"
+        android:textColor="@android:color/holo_red_dark" />
 
     <Button
         android:id="@+id/Registerbtn"

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.internal.Preconditions;
@@ -26,11 +27,19 @@ public class Main2Activity extends AppCompatActivity {
 
     String usersname;
     private FirebaseAuth mAuth;
+    TextView msg1,msg2,msg3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        msg1 = (TextView) findViewById(R.id.textView4);
+        msg2 = (TextView) findViewById(R.id.textView7);
+        msg3 = (TextView) findViewById(R.id.textView8);
+        msg1.setVisibility(View.GONE);
+        msg2.setVisibility(View.GONE);
+        msg3.setVisibility(View.GONE);
+
     }
 
 
@@ -38,6 +47,10 @@ public class Main2Activity extends AppCompatActivity {
 // this function will be triggerd when users presses the register button, and putting his details into the database
 
     public void register(View view) {
+        msg1.setVisibility(View.GONE);
+        msg2.setVisibility(View.GONE);
+        msg3.setVisibility(View.GONE);
+
         EditText email =    (EditText) findViewById(R.id.Register_Email);
         EditText password = (EditText) findViewById(R.id.Register_Password);
         EditText name = (EditText) findViewById(R.id.Register_User);
@@ -45,19 +58,26 @@ public class Main2Activity extends AppCompatActivity {
         String email1 = email.getText().toString().trim();
         String password1 = password.getText().toString().trim();
         usersname = name.getText().toString().trim();
-
+         // to check
+        int error =0;
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email1).matches()) {
-            email.setText("Not an Email!");
-            return;
+            msg1.setVisibility(View.VISIBLE);
+            error ++;
+
         }
 
         if (usersname.equals("")) {
-            name.setText("Please Enter a name!");
-            return;
+            msg3.setVisibility(View.VISIBLE);
+            error ++;
+
         }
 
         if (password1.length() < 6) {
-          password.setText("Password should be at least 6 digits long! ");
+            msg2.setVisibility(View.VISIBLE);
+            error ++;
+
+        }
+        if(error !=0){
             return;
         }
 
