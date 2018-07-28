@@ -40,6 +40,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        Refresh();
+        ls = (ListView) findViewById(R.id.list);
+
+        ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this,PostView.class);
+
+                TextView cityName =(TextView) view.findViewById(R.id.txtcity);
+                TextView actionName =(TextView) view.findViewById(R.id.txtaction);
+                TextView userName =(TextView) view.findViewById(R.id.txtuser);
+
+                String city = cityName.getText().toString().trim();
+                String action = actionName.getText().toString().trim();
+                String user = userName.getText().toString().trim();
+
+                intent.putExtra("city",city);
+                intent.putExtra("action",action);
+                intent.putExtra("user",user);
+
+
+                startActivity(intent);
+
+            }
+        });
 
 
 
@@ -55,31 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-       Refresh();
-       ls = (ListView) findViewById(R.id.list);
 
-        ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               Intent intent = new Intent(MainActivity.this,PostView.class);
-
-               TextView cityName =(TextView) view.findViewById(R.id.txtcity);
-               TextView actionName =(TextView) view.findViewById(R.id.txtaction);
-               TextView userName =(TextView) view.findViewById(R.id.txtuser);
-
-               String city = cityName.getText().toString().trim();
-               String action = actionName.getText().toString().trim();
-               String user = userName.getText().toString().trim();
-
-               intent.putExtra("city",city);
-               intent.putExtra("action",action);
-               intent.putExtra("user",user);
-
-
-               startActivity(intent);
-
-           }
-       });
         super.onResume();
     }
 
