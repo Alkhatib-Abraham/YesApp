@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
                     for (Posts post : posts) {
                         //add a new post to the arrayList with help of the posts class
-                        Items.add(new ListItem(post.getCityName(), post.getAction(),post.getName()));
+                        Items.add(new ListItem(post.getCityName(), post.getAction(),post.getName(),post.getDescription()));
 
                         // transfers the ListArray into the ListView with the CustomAdapter
                         final MyCustomAdapter myadpter = new MyCustomAdapter(Items);
@@ -192,11 +192,16 @@ public class MainActivity extends AppCompatActivity {
             TextView txtname =(TextView) view1.findViewById(R.id.txtcity);
             TextView txtdes =(TextView) view1.findViewById(R.id.txtaction);
             TextView txtuser =(TextView) view1.findViewById(R.id.txtuser);
+            TextView txtdiscreption =(TextView) view1.findViewById(R.id.textView14);
+
+
 
             //get the data from Items and put it in the right places
             txtname.setText(Items.get(i).Name);
             txtdes.setText(Items.get(i).Desc);
             txtuser.setText(Items.get(i).User);
+            txtdiscreption.setText(Items.get(i).Discription);
+
             return view1;
 
         }

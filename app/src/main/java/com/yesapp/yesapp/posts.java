@@ -5,13 +5,17 @@ public class Posts {
         private String cityName;
         private String action;
         private String name;
+        private String description;
 
 
         public String getCityName() {
-            return cityName;
+            return this.cityName;
         }
 
-        public void setCityName(String title) {
+
+
+
+    public void setCityName(String title) {
             this.cityName = title;
         }
 
@@ -19,7 +23,10 @@ public class Posts {
             return action;
         }
 
-        public void setAction(String content) {
+
+
+
+    public void setAction(String content) {
             this.action = content;
         }
 
@@ -31,6 +38,13 @@ public class Posts {
            this.name =name ;
 
         }
+
+    public String getDescription() {
+        return this.description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
 }

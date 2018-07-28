@@ -26,8 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Create extends AppCompatActivity {
 
-    EditText cityName;
-    EditText action;
+    EditText cityName,description,action;
     DatabaseReference myRef;
     TextView text;
 
@@ -37,6 +36,7 @@ public class Create extends AppCompatActivity {
         setContentView(R.layout.activity_create);
         cityName = (EditText) findViewById(R.id.cityname);
         action = (EditText) findViewById(R.id.action);
+        description = (EditText) findViewById(R.id.editText2);
 
 
 
@@ -50,7 +50,8 @@ public class Create extends AppCompatActivity {
 
 
     public void post(View view) {
-        if (!cityName.getText().toString().equals("") && !action.getText().toString().equals("")) {//to check that the user wrote something
+        if (!cityName.getText().toString().equals("") && !action.getText().toString().equals("")
+                && !description.getText().toString().equals("")) {//to check that the user wrote something
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myName = database.getReference("posts");
@@ -58,6 +59,7 @@ public class Create extends AppCompatActivity {
             Posts post = new Posts();
             post.setCityName(cityName.getText().toString());
             post.setAction(action.getText().toString());
+            post.setDescription(description.getText().toString().trim());
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
