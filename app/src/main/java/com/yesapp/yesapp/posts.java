@@ -42,7 +42,8 @@ public class Posts {
     public String getDescription() {
         return this.description;
     }
-    public void setDescription(String description) {
+
+    public void setDescription(String content) {
         this.description = description;
     }
 

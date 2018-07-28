@@ -82,7 +82,7 @@ public class login extends AppCompatActivity {
     //=======================================================================================================================================================
     // this function will be luanched when user press the register button
     public void re(View view) {
-        startActivity(new Intent(login.this, Main2Activity.class));
+        startActivity(new Intent(login.this, RegisterActivity.class));
 
     }
 //=======================================================================================================================================================

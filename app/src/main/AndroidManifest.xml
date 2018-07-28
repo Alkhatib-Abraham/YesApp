@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         />
-        <activity android:name=".Main2Activity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".Settings" />
         <activity android:name=".PostView"></activity>
     </application>

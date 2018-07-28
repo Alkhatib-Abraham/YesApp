@@ -6,7 +6,7 @@
 
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Main2Activity">
+    tools:context=".RegisterActivity">
 
     <EditText
         android:id="@+id/Register_Email"
@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteY="3dp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/errorMsg1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Invalid Email, Please try again"
@@ -37,7 +37,7 @@
         tools:layout_editor_absoluteY="49dp" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/errorMsg2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Password must be at least 6 digits"
@@ -52,7 +52,7 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/errorMsg3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Please Enter a Name"
