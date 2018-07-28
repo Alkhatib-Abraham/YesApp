@@ -19,7 +19,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 // This is the register Activity
 public class RegisterActivity extends AppCompatActivity {
 
-    String usersname;
+    String register_usersname;
     private FirebaseAuth mAuth;
     TextView msg1,msg2,msg3;
 
@@ -46,41 +46,37 @@ public class RegisterActivity extends AppCompatActivity {
         msg2.setVisibility(View.GONE);
         msg3.setVisibility(View.GONE);
 
-        EditText email =    (EditText) findViewById(R.id.Register_Email);
-        EditText password = (EditText) findViewById(R.id.Register_Password);
-        EditText name =     (EditText) findViewById(R.id.Register_User);
+        EditText reg_email =    (EditText) findViewById(R.id.Register_Email);
+        EditText reg_password =     (EditText) findViewById(R.id.Register_Password);
+        EditText reg_name =         (EditText) findViewById(R.id.Register_User);
 
-        String email1 = email.getText().toString().trim();
-        String password1 = password.getText().toString().trim();
-        usersname = name.getText().toString().trim();
-         // to check
+        String register_email = reg_email.getText().toString().trim();
+        String register_password = reg_password.getText().toString().trim();
+        register_usersname = reg_name.getText().toString().trim();
+
+         // to check==================
         int error =0;
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email1).matches()) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(register_email).matches()) {
             msg1.setVisibility(View.VISIBLE);
             error ++;
-
         }
-
-        if (usersname.equals("")) {
+        if (register_usersname.equals("")) {
             msg3.setVisibility(View.VISIBLE);
             error ++;
-
         }
-
-        if (password1.length() < 6) {
+        if (register_password.length() < 6) {
             msg2.setVisibility(View.VISIBLE);
             error ++;
-
         }
         if(error !=0){
             return;
-        }
+        }//----------------------------
 
 
 
-        //the Register data get added to Firebase
+        //========================the Register data get added to FireBase==================
         mAuth = FirebaseAuth.getInstance();
-        mAuth.createUserWithEmailAndPassword(email1 , password1).addOnCompleteListener(new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(register_email , register_password).addOnCompleteListener(new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
 
 
 
@@ -91,8 +87,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Succesful", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
 
+                    //to add the register usersname
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(usersname).build();
+                            .setDisplayName(register_usersname).build();
                     user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -102,14 +99,9 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
 
-                    Log.e("Test",user.getDisplayName()+"");
-
-
-
-
-                        startActivity(new Intent(RegisterActivity.this, login.class));
-
+                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 }
+
                 else {
                     // if email already registerd
                     if (task.getException().getMessage().equals("The email address is already in use by another account.")) {
@@ -120,9 +112,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Failed", Toast.LENGTH_SHORT).show();
 
                 }//end of else
-
-
-
 
             }//end of in Complete
         }); //end of the Auth. prossess

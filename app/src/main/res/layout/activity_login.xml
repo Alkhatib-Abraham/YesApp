@@ -6,10 +6,10 @@
 
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".login">
+    tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/edit1"
+        android:id="@+id/loginEmailEdiText"
         android:layout_width="364dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -19,14 +19,14 @@
         tools:layout_editor_absoluteY="5dp" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/errorMsg4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Invalid Email, Please try again"
         android:textColor="@android:color/holo_red_dark" />
 
     <EditText
-        android:id="@+id/edit2"
+        android:id="@+id/loginPasswordEdiText"
         android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -37,14 +37,14 @@
         tools:layout_editor_absoluteY="51dp" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/errorMsg5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Password must be at least 6 digits"
         android:textColor="@android:color/holo_red_dark" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="login"
@@ -53,10 +53,10 @@
         tools:layout_editor_absoluteY="201dp" />
 
     <Button
-        android:id="@+id/re"
+        android:id="@+id/registerBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="re"
+        android:onClick="goToRegisterActivity"
         android:text="Register"
         tools:layout_editor_absoluteX="102dp"
         tools:layout_editor_absoluteY="249dp" />

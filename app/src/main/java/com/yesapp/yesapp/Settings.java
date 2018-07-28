@@ -86,8 +86,8 @@ public class Settings extends AppCompatActivity {
 
     public void sign_out(View view) {
         FirebaseAuth.getInstance().signOut();
-        login.sp.edit().putBoolean("logged", false).apply();
-        Intent b = new Intent(Settings.this, login.class);
+        LoginActivity.sp.edit().putBoolean("logged", false).apply(); //should be fixed in the future to not depend on another activity
+        Intent b = new Intent(Settings.this, LoginActivity.class);
         startActivity(b);
         finish();
 
