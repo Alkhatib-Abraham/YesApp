@@ -32,6 +32,7 @@ import java.util.List;
 // This is to read data from a database and place it in a list view
 public class MainActivity extends AppCompatActivity {
 
+    ListView ls;
     SwipeRefreshLayout swipeRefreshLayout;
     private int onBackPressed = 0;
     @Override
@@ -55,6 +56,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
        Refresh();
+       ls = (ListView) findViewById(R.id.list);
+
+        ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+               Intent intent = new Intent(MainActivity.this,PostView.class);
+               startActivity(intent);
+
+           }
+       });
         super.onResume();
     }
 
@@ -106,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // transfers the ListArray into the ListView with the CustomAdapter
                         final MyCustomAdapter myadpter = new MyCustomAdapter(Items);
-                        ListView ls = (ListView) findViewById(R.id.list);
+                         ls = (ListView) findViewById(R.id.list);
                         ls.setAdapter(myadpter);
                     }
 
@@ -126,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this,Settings.class);
         startActivity(intent);
     }
+
+
+
 
     //==============================================================================================
 
