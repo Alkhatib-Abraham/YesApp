@@ -9,7 +9,7 @@
     tools:layout_editor_absoluteY="81dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/variableImageView"
         android:layout_width="97dp"
         android:layout_height="88dp"
         android:layout_marginStart="8dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtuser"
+        android:id="@+id/variableTextViewUsersName"
         android:layout_width="97dp"
         android:layout_height="16dp"
         android:layout_gravity="left"
@@ -30,24 +30,24 @@
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/variableImageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/variableImageView" />
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewCity"
         android:layout_width="74dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="City: "
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/variableImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtaction"
+        android:id="@+id/variableTextViewAction"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_gravity="left"
@@ -55,23 +55,23 @@
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/txtcity"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="@+id/variableTextViewCity"
+        app:layout_constraintTop_toTopOf="@+id/textViewWhatToDo" />
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewWhatToDo"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="24dp"
         android:text="what to do? "
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewCity"
+        app:layout_constraintStart_toEndOf="@+id/variableImageView"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCity" />
 
     <TextView
-        android:id="@+id/txtcity"
+        android:id="@+id/variableTextViewCity"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_gravity="left"
@@ -81,11 +81,11 @@
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textViewCity"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/variableTextViewDescription"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -94,7 +94,7 @@
         android:text="Here comes a multi line action  djpsj djds dojsdpj dlfkjfdj dflkjfdsj ldkfjpsdfj dfjpoj fsdjs'p ojdfop sdfjp' psdfjpo djoi oidjfp opdjp ojdo oidjfp iodsfjpi "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtuser" />
+        app:layout_constraintTop_toBottomOf="@+id/variableTextViewUsersName" />
 
 
 </android.support.constraint.ConstraintLayout>

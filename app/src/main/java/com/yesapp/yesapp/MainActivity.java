@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this,PostView.class);
 
-                TextView cityName =(TextView) view.findViewById(R.id.txtcity);
-                TextView actionName =(TextView) view.findViewById(R.id.txtaction);
-                TextView userName =(TextView) view.findViewById(R.id.txtuser);
-                TextView discr =(TextView) view.findViewById(R.id.textView14);
+                TextView cityName =(TextView) view.findViewById(R.id.variableTextViewCity);
+                TextView actionName =(TextView) view.findViewById(R.id.variableTextViewAction);
+                TextView userName =(TextView) view.findViewById(R.id.variableTextViewUsersName);
+                TextView discr =(TextView) view.findViewById(R.id.variableTextViewDescription);
 
                 intent.putExtra("city",cityName.getText().toString().trim());
                 intent.putExtra("action",actionName.getText().toString().trim());
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public String getItem(int position) {
-            return PostsArrayList.get(position).Name;
+            return PostsArrayList.get(position).CityName;
         }
 
         @Override
@@ -192,19 +192,20 @@ public class MainActivity extends AppCompatActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             LayoutInflater linflater = getLayoutInflater();
             View view1=linflater.inflate(R.layout.row_view, null);
-            //the Textviews which are used to present the data
-            TextView txtname =(TextView) view1.findViewById(R.id.txtcity);
-            TextView txtdes =(TextView) view1.findViewById(R.id.txtaction);
-            TextView txtuser =(TextView) view1.findViewById(R.id.txtuser);
-            TextView txtdiscreption =(TextView) view1.findViewById(R.id.textView14);
+
+            //the TextViews which are used to present the data
+            TextView variableTextViewCity         =(TextView) view1.findViewById(R.id.variableTextViewCity);
+            TextView variableTextViewAction       =(TextView) view1.findViewById(R.id.variableTextViewAction);
+            TextView variableTextViewUsersName    =(TextView) view1.findViewById(R.id.variableTextViewUsersName);
+            TextView variableTextViewDescription  =(TextView) view1.findViewById(R.id.variableTextViewDescription);
 
 
 
             //get the data from Items and put it in the right places
-            txtname.setText(PostsArrayList.get(i).Name);
-            txtdes.setText(PostsArrayList.get(i).Desc);
-            txtuser.setText(PostsArrayList.get(i).User);
-            txtdiscreption.setText(PostsArrayList.get(i).Discription);
+            variableTextViewCity.setText(PostsArrayList.get(i).CityName);
+            variableTextViewAction.setText(PostsArrayList.get(i).ActionName);
+            variableTextViewUsersName.setText(PostsArrayList.get(i).UsersName);
+            variableTextViewDescription.setText(PostsArrayList.get(i).Description);
 
             return view1;
 

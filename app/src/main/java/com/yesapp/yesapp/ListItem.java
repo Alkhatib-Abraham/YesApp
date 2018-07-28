@@ -2,21 +2,21 @@ package com.yesapp.yesapp;
 
 public class ListItem {
 
-    public String Name;
-    public String Desc;
-    public String User;
-    public String Discription;
+    public String CityName;
+    public String ActionName;
+    public String UsersName;
+    public String Description;
 
 
 
 
 
-    ListItem(String Name,String Desc,String User, String Discription){
+    ListItem(String CityName,String ActionName,String UsersName, String Description){
 
-        this.Name=Name;
-        this.Desc=Desc;
-        this.User=User;
-        this.Discription=Discription;
+        this.CityName=CityName;
+        this.ActionName=ActionName;
+        this.UsersName=UsersName;
+        this.Description =Description;
 
     }
 }
