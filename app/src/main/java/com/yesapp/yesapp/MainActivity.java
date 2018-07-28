@@ -51,14 +51,21 @@ public class MainActivity extends AppCompatActivity {
                 TextView cityName =(TextView) view.findViewById(R.id.txtcity);
                 TextView actionName =(TextView) view.findViewById(R.id.txtaction);
                 TextView userName =(TextView) view.findViewById(R.id.txtuser);
+                TextView discr =(TextView) view.findViewById(R.id.textView14);
+
 
                 String city = cityName.getText().toString().trim();
                 String action = actionName.getText().toString().trim();
                 String user = userName.getText().toString().trim();
+                String disc = discr.getText().toString().trim();
+
 
                 intent.putExtra("city",city);
                 intent.putExtra("action",action);
                 intent.putExtra("user",user);
+                intent.putExtra("discreption",disc);
+
+
 
 
                 startActivity(intent);
