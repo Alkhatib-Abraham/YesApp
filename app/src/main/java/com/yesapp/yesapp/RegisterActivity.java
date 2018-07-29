@@ -100,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                     });
 
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        finish();
                 }
 
                 else {
@@ -109,8 +110,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                     }//end of if
 
-                    Toast.makeText(RegisterActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-
+                    else {
+                        Toast.makeText(RegisterActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    }
                 }//end of else
 
             }//end of in Complete

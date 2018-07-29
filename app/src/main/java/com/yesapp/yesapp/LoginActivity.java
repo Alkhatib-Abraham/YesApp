@@ -1,5 +1,6 @@
 package com.yesapp.yesapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     public static SharedPreferences sp;//to save if the user has been logged in
     ProgressBar progressBar;
     Button loginBtn, registerBtn;
+    private int onBackPressed = 0;
 
 
     @Override
@@ -83,8 +85,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
-
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Press Back again to Exit",Toast.LENGTH_SHORT).show();
+        if(onBackPressed==1){
+            onBackPressed =0;
+            finish();
+        }
+        onBackPressed ++;
+    }
 
     //==============================================================================================
     // this function will be lunched when the user presses on the the register button

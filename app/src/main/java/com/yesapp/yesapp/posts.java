@@ -11,33 +11,31 @@ public class Posts {
         public String getCityName() {
             return this.cityName;
         }
-
-
-
-
     public void setCityName(String title) {
             this.cityName = title;
         }
 
+
+
+
         public String getAction() {
             return action;
         }
-
-
-
-
     public void setAction(String content) {
             this.action = content;
         }
+
+
+
 
         public String getName(){
             return name;
         }
         public void setName(String name){
-
            this.name =name ;
-
         }
+
+
 
     public String getDescription() {
         return this.description;
