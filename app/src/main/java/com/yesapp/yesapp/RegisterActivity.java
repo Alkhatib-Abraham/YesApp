@@ -21,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     String register_usersname;
     private FirebaseAuth mAuth;
-    TextView msg1,msg2,msg3;
+    TextView msg1,msg2,msg3,msg22;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,13 @@ public class RegisterActivity extends AppCompatActivity {
         msg1 = (TextView) findViewById(R.id.errorMsg1);
         msg2 = (TextView) findViewById(R.id.errorMsg2);
         msg3 = (TextView) findViewById(R.id.errorMsg3);
+        msg22 = (TextView) findViewById(R.id.errorMsg22);
+
         msg1.setVisibility(View.GONE);
         msg2.setVisibility(View.GONE);
         msg3.setVisibility(View.GONE);
+        msg22.setVisibility(View.GONE);
+
 
     }
 
@@ -45,13 +49,18 @@ public class RegisterActivity extends AppCompatActivity {
         msg1.setVisibility(View.GONE);
         msg2.setVisibility(View.GONE);
         msg3.setVisibility(View.GONE);
+        msg22.setVisibility(View.GONE);
+
 
         EditText reg_email =    (EditText) findViewById(R.id.Register_Email);
         EditText reg_password =     (EditText) findViewById(R.id.Register_Password);
+        EditText reg_password2 =         (EditText) findViewById(R.id.Register_Password2);
         EditText reg_name =         (EditText) findViewById(R.id.Register_User);
+
 
         String register_email = reg_email.getText().toString().trim();
         String register_password = reg_password.getText().toString().trim();
+        String register_password2 = reg_password2.getText().toString().trim();
         register_usersname = reg_name.getText().toString().trim();
 
          // to check==================
@@ -66,6 +75,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
         if (register_password.length() < 6) {
             msg2.setVisibility(View.VISIBLE);
+            error ++;
+        }
+        if (!register_password.equals(register_password2)) {
+            msg22.setVisibility(View.VISIBLE);
             error ++;
         }
         if(error !=0){

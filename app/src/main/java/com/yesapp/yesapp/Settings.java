@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,6 +52,12 @@ public class Settings extends AppCompatActivity {
 
 
     public void changeName(View view) {
+
+
+        if(newNameText.getText().toString().equals("")){
+            Toast.makeText(Settings.this,"Please enter a name",Toast.LENGTH_SHORT).show();
+            return;
+        }
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
 

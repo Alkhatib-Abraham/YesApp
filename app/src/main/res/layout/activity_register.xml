@@ -44,6 +44,24 @@
         android:textColor="@android:color/holo_red_dark" />
 
     <EditText
+        android:id="@+id/Register_Password2"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="please enter the Password again"
+        android:inputType="textPersonName"
+        android:password="true"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="49dp" />
+
+    <TextView
+        android:id="@+id/errorMsg22"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password dosn't match"
+        android:textColor="@android:color/holo_red_dark" />
+
+    <EditText
         android:id="@+id/Register_User"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

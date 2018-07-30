@@ -61,6 +61,16 @@
         tools:layout_editor_absoluteX="102dp"
         tools:layout_editor_absoluteY="249dp" />
 
+    <TextView
+        android:id="@+id/resetPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:gravity="center_horizontal"
+        android:text="Forget your password?"
+        android:onClick="resetPassword"
+        android:textColor="@color/colorPrimaryDark" />
+
     <ProgressBar
         android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyle"
