@@ -56,11 +56,15 @@ public class MainActivity extends AppCompatActivity {
                 TextView actionName =(TextView) view.findViewById(R.id.variableTextViewAction);
                 TextView userName =(TextView) view.findViewById(R.id.variableTextViewUsersName);
                 TextView discr =(TextView) view.findViewById(R.id.variableTextViewDescription);
+                TextView postId =(TextView) view.findViewById(R.id.variableTextViewPostId);
+
+
 
                 intent.putExtra("city",cityName.getText().toString().trim());
                 intent.putExtra("action",actionName.getText().toString().trim());
                 intent.putExtra("user",userName.getText().toString().trim());
-                intent.putExtra("discreption",discr.getText().toString().trim());
+                intent.putExtra("description",discr.getText().toString().trim());
+                intent.putExtra("postId",postId.getText().toString().trim());
                 startActivity(intent);
 
             }
@@ -104,31 +108,41 @@ public class MainActivity extends AppCompatActivity {
 
     public void refresh(){
         //necessary References
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference posts = database.getReference("posts");
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("posts");
 
         // Pull the posts from the cloud and put them in a listView
-        posts.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue()!=null) {
+                    Iterable<DataSnapshot> posts = dataSnapshot.getChildren(); //get all posts
 
-                    //pulls from the cloud
-                    HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {
-                    });
-                    List<Posts> posts = new ArrayList<>(results.values());
+//                    //pulls from the cloud
+//                    HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {
+//                    });
+//                    List<Posts> posts = new ArrayList<>(results.values());
+//
+
                     //defines an Arraylist
                     final ArrayList<ListItem> Items = new ArrayList<ListItem>();
                     // iterates through the posts and put them in the Adapter
 
-                    for (Posts post : posts) {
+
+                    for (DataSnapshot post : posts) {
+
+                        Posts postObj = post.getValue(Posts.class);
+                        postObj.setPostId(post.getKey());
                         //add a new post to the arrayList with help of the posts class
-                        Items.add(new ListItem(post.getCityName(), post.getAction(),post.getName(),post.getDescription()));
+                        Items.add(new ListItem(postObj.getCityName(), postObj.getAction(),postObj.getName(),postObj.getDescription(),postObj.getPostId()));
+
 
                         // transfers the ListArray into the ListView with the CustomAdapter
                         final MyCustomAdapter myadpter = new MyCustomAdapter(Items);
                         mainScreenListView = (ListView) findViewById(R.id.list);
                         mainScreenListView.setAdapter(myadpter);
+
+
                     }
 
                 }}//end of the add On DataChange listener
@@ -138,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }); //end of the Database.addValueEventListener
+
 
         Toast.makeText(MainActivity.this,"Refreshed",Toast.LENGTH_SHORT).show();
         swipeRefreshLayout.setRefreshing(false); //stop refreshing
@@ -204,14 +219,15 @@ public class MainActivity extends AppCompatActivity {
             TextView variableTextViewAction       =(TextView) view1.findViewById(R.id.variableTextViewAction);
             TextView variableTextViewUsersName    =(TextView) view1.findViewById(R.id.variableTextViewUsersName);
             TextView variableTextViewDescription  =(TextView) view1.findViewById(R.id.variableTextViewDescription);
-
-
+            TextView variableTextViewPostId       =(TextView) view1.findViewById(R.id.variableTextViewPostId);
 
             //get the data from Items and put it in the right places
             variableTextViewCity.setText(PostsArrayList.get(i).CityName);
             variableTextViewAction.setText(PostsArrayList.get(i).ActionName);
             variableTextViewUsersName.setText(PostsArrayList.get(i).UsersName);
             variableTextViewDescription.setText(PostsArrayList.get(i).Description);
+            variableTextViewPostId.setText(PostsArrayList.get(i).PostId);
+
 
             return view1;
 

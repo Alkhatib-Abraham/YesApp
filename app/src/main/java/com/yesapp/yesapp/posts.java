@@ -6,9 +6,18 @@ public class Posts {
         private String action;
         private String name;
         private String description;
+        private String postId;
 
 
-        public String getCityName() {
+    public String getPostId() {
+        return this.postId;
+    }
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+
+    public String getCityName() {
             return this.cityName;
         }
     public void setCityName(String title) {
@@ -41,7 +50,7 @@ public class Posts {
         return this.description;
     }
 
-    public void setDescription(String content) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

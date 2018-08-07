@@ -96,5 +96,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/variableTextViewUsersName" />
 
+    <TextView
+        android:id="@+id/variableTextViewPostId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="192dp" />
+
 
 </android.support.constraint.ConstraintLayout>

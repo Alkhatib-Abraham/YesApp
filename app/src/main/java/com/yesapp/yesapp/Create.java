@@ -56,7 +56,9 @@ public class Create extends AppCompatActivity {
                 && !description.getText().toString().equals("")) {//to check that the user wrote something
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myName = database.getReference("posts");
+            DatabaseReference databaseReference = database.getReference("posts");
+
+
 
             Posts post = new Posts();
             post.setCityName(cityName.getText().toString());
@@ -68,7 +70,8 @@ public class Create extends AppCompatActivity {
 
             post.setName(user.getDisplayName());
 
-            myName.push().setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            databaseReference.push().setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {

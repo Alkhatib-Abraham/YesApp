@@ -6,17 +6,19 @@ public class ListItem {
     public String ActionName;
     public String UsersName;
     public String Description;
+    public String PostId;
 
 
 
 
 
-    ListItem(String CityName,String ActionName,String UsersName, String Description){
+    ListItem(String CityName, String ActionName, String UsersName, String Description, String PostId){
 
         this.CityName=CityName;
         this.ActionName=ActionName;
         this.UsersName=UsersName;
         this.Description =Description;
+        this.PostId = PostId;
 
     }
 }
