@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class PostView extends AppCompatActivity {
 
+    String postId ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +35,8 @@ public class PostView extends AppCompatActivity {
         textView1.setText(intent.getStringExtra("action"));
         textView2.setText(intent.getStringExtra("user"));
         textView3.setText(intent.getStringExtra("description"));
-
-        textView4.setText(intent.getStringExtra("postId"));
+        postId = intent.getStringExtra("postId");
+        textView4.setText(postId);
 
 
 
@@ -49,7 +51,14 @@ public class PostView extends AppCompatActivity {
     }
 
     public void Yes(View view) {
-// save the post Id by the user to be able to load it again with it's unice Id
+     // save the post Id by the user to be able to load it again with it's unice Id
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("yesedPosts");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        databaseReference.push().child("post").setValue(postId);
+         databaseReference.child("Email").setValue(user.getEmail());
+
 
 
 
