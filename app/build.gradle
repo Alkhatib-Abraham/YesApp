@@ -20,12 +20,27 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
     implementation 'com.android.support:design:26.1.0'
+
+
+    //fireBase
     implementation 'com.google.firebase:firebase-core:16.0.0'
     implementation 'com.google.firebase:firebase-auth:16.0.2'
 
     implementation 'com.google.firebase:firebase-database:16.0.1'
 
+    //glide (an Image handling library)
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
+//for circle images
+   implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    //recyclerView
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+
+    //app stuff
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
