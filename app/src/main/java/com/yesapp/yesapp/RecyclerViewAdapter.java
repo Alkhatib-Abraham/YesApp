@@ -1,15 +1,13 @@
 package com.yesapp.yesapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
  public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -48,9 +46,34 @@ import java.util.ArrayList;
                    holder.variableTextViewPostId.setText(PostsArrayList.get(position).PostId);
 
                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+
                        @Override
                        public void onClick(View view) {
-                           Toast.makeText(mContext,"Clicked",Toast.LENGTH_LONG);
+
+                  Intent intent = new Intent(mContext,PostView.class);
+
+                           TextView cityName =(TextView) view.findViewById(R.id.variableTextViewCity);
+                                 TextView actionName =(TextView) view.findViewById(R.id.variableTextViewAction);
+                                 TextView userName =(TextView) view.findViewById(R.id.variableTextViewUsersName);
+                                 TextView discr =(TextView) view.findViewById(R.id.variableTextViewDescription);
+                                 TextView postId =(TextView) view.findViewById(R.id.variableTextViewPostId);
+
+
+
+                                 intent.putExtra("city",cityName.getText().toString().trim());
+                                 intent.putExtra("action",actionName.getText().toString().trim());
+                                 intent.putExtra("user",userName.getText().toString().trim());
+                                 intent.putExtra("description",discr.getText().toString().trim());
+                                 intent.putExtra("postId",postId.getText().toString().trim());
+                                 mContext.startActivity(intent);
+
+
+
+
+
+
+
                        }
                    });
 

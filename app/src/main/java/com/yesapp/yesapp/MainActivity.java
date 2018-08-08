@@ -47,33 +47,6 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         refresh(); //to get the new content
 
-     //============================to open a screen when clicking on an Item========================
-//        mainScreenRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
-//        mainScreenRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(MainActivity.this,PostView.class);
-//
-//                TextView cityName =(TextView) view.findViewById(R.id.variableTextViewCity);
-//                TextView actionName =(TextView) view.findViewById(R.id.variableTextViewAction);
-//                TextView userName =(TextView) view.findViewById(R.id.variableTextViewUsersName);
-//                TextView discr =(TextView) view.findViewById(R.id.variableTextViewDescription);
-//                TextView postId =(TextView) view.findViewById(R.id.variableTextViewPostId);
-//
-//
-//
-//                intent.putExtra("city",cityName.getText().toString().trim());
-//                intent.putExtra("action",actionName.getText().toString().trim());
-//                intent.putExtra("user",userName.getText().toString().trim());
-//                intent.putExtra("description",discr.getText().toString().trim());
-//                intent.putExtra("postId",postId.getText().toString().trim());
-//                startActivity(intent);
-//
-//            }
-//        });
-        //--------------------------------The End of the Listener-----------------------------------
-
-
 
 
         //======================SwipeRefresh Layout Listener to track the refreshing================
@@ -126,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 //                    List<Posts> posts = new ArrayList<>(results.values());
 //
 
-                    //defines an Arraylist
+                    //defines an ArrayList
                     final ArrayList<ListItem> ItemsArrayList;
                     ItemsArrayList = new ArrayList<ListItem>();
                     // iterates through the posts and put them in the Adapter
@@ -176,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    //this void initialises the RecyclerView
     public void initRecyclerView(ArrayList<ListItem> ItemsArrayList){
 
         // transfers the ListArray into the RecyclerView with the CustomAdapter
@@ -185,61 +160,5 @@ public class MainActivity extends AppCompatActivity {
         mainScreenRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
-    //----------------------------------------------------------------------------------------------
 
-
-
-
-
-    //===========================The Custom Adapter Class===========================================
-
-//    class MyCustomAdapter extends BaseAdapter
-//        //this class defines how the ViewItems of the Arraylist are inflated
-//    {
-//      //  ArrayList<ListItem> PostsArrayList= new ArrayList<ListItem>();
-//
-//
-//        MyCustomAdapter(ArrayList<ListItem> PostsArrayList ) {
-//            this.PostsArrayList=PostsArrayList;
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return PostsArrayList.size();
-//        }
-//
-//        @Override
-//        public String getItem(int position) {
-//            return PostsArrayList.get(position).CityName;
-//        }
-//
-//        @Override
-//        public long getItemId(int position) {
-//            return  position;
-//        }
-//
-//        @Override
-//        public View getView(int i, View view, ViewGroup viewGroup) {
-//            LayoutInflater linflater = getLayoutInflater();
-//            View view1=linflater.inflate(R.layout.row_view, null);
-
-            //the TextViews which are used to present the data
-//            TextView variableTextViewCity         =(TextView) view1.findViewById(R.id.variableTextViewCity);
-//            TextView variableTextViewAction       =(TextView) view1.findViewById(R.id.variableTextViewAction);
-//            TextView variableTextViewUsersName    =(TextView) view1.findViewById(R.id.variableTextViewUsersName);
-//            TextView variableTextViewDescription  =(TextView) view1.findViewById(R.id.variableTextViewDescription);
-//            TextView variableTextViewPostId       =(TextView) view1.findViewById(R.id.variableTextViewPostId);
-
-            //get the data from Items and put it in the right places
-//            variableTextViewCity.setText(PostsArrayList.get(i).CityName);
-//            variableTextViewAction.setText(PostsArrayList.get(i).ActionName);
-//            variableTextViewUsersName.setText(PostsArrayList.get(i).UsersName);
-//            variableTextViewDescription.setText(PostsArrayList.get(i).Description);
-//            variableTextViewPostId.setText(PostsArrayList.get(i).PostId);
-
-
-//            return view1;
-//
-//        }
-//    }
 }
