@@ -17,6 +17,12 @@ android {
         }
     }
 }
+//for the chat feature
+repositories {
+    maven { url "http://dl.bintray.com/chat-sdk/chat-sdk-android" }
+    maven { url "https://maven.google.com" }
+    maven { url "https://jitpack.io" }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -41,5 +47,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+    //for the chat
+    implementation 'co.chatsdk.chatsdk:chat-sdk-core:4.1.8'
+    implementation 'co.chatsdk.chatsdk:chat-sdk-ui:4.1.8'
+    implementation 'co.chatsdk.chatsdk:chat-sdk-firebase-adapter:4.1.8'
+    implementation 'co.chatsdk.chatsdk:chat-sdk-firebase-file-storage:4.1.8'
 }
+
+
 apply plugin: 'com.google.gms.google-services'
