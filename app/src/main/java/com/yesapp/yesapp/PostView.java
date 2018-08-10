@@ -53,11 +53,11 @@ public class PostView extends AppCompatActivity {
     public void Yes(View view) {
      // save the post Id by the user to be able to load it again with it's unice Id
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("yesedPosts");
+        DatabaseReference databaseReference = database.getReference(postId);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        databaseReference.push().child("post").setValue(postId);
-         databaseReference.child("Email").setValue(user.getEmail());
+
+
 
 
 

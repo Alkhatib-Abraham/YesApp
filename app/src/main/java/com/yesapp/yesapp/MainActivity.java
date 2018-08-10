@@ -135,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     //=============================go to the Create Activity========================================
     public void goToCreateActivity(View view) {
         Intent i = new Intent(MainActivity.this, Create.class);
