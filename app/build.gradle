@@ -23,17 +23,14 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:design:27.1.0'
 
-
     //fireBase
     implementation 'com.google.firebase:firebase-core:16.0.0'
     implementation 'com.google.firebase:firebase-auth:16.0.2'
 
     implementation 'com.google.firebase:firebase-database:16.0.1'
 
-
-
 //for circle images
-   implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     //recyclerView
     implementation 'com.android.support:recyclerview-v7:26.1.0'
