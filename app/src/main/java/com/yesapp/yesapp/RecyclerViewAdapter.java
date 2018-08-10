@@ -1,5 +1,6 @@
 package com.yesapp.yesapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -57,7 +58,25 @@ import java.util.ArrayList;
                    holder.variableTextViewUsersName.setText(PostsArrayList.get(position).UsersName);
                    holder.variableTextViewDescription.setText(PostsArrayList.get(position).Description);
                    holder.variableTextViewPostId.setText(PostsArrayList.get(position).PostId);
-                   holder.variableTextViewYesPerson.setText(PostsArrayList.get(position).getYes);
+                   //to get people who said Yes
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = database.getReference("posts/" +PostsArrayList.get(position).PostId+"/Yes/name1");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                   if(dataSnapshot.getValue() !=null) {
+               holder.variableTextViewYesPerson.setText(dataSnapshot.getValue().toString()+" said Yes!");
+                   }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        // holder.variableTextViewYesPerson.setText(PostsArrayList.get(position).gt);
 
 
 
@@ -98,38 +117,52 @@ import java.util.ArrayList;
 
 
 
+                /*
+                * I used 3 dataBaseReferences
+                * the first one to save the email of the Yes person
+                * THe third was for his name
+                * the second was to get the Author's Email to check who wrote the post
+                *
+                * */
+
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                DatabaseReference databaseReference = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString()).child("Yes");
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final DatabaseReference databaseReference = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString()).child("Yes");
 
-//                //to get the author's email
-//                 final String[] authorsEmail = new String[1];
-//                Posts posts;
-//                DatabaseReference databaseReference2 = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString());
-//                databaseReference2.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        // posts =dataSnapshot.getValue(Posts.class);
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                });
-                //  if(!user.getEmail().equals()) { // to check if the user isn't saying yes to his own post
-                      databaseReference.setValue(user.getEmail());
-                      holder.variableTextViewYesPerson.setText(user.getDisplayName() + " said Yes!");
-                  }
-                //  else{
-                    //Toast.makeText(mContext,"can't say yes to your own post!",Toast.LENGTH_SHORT).show();
-
-                //  }
+                //to get the author's email
+                final DatabaseReference databaseReference2 = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString());
 
 
-           // }
+               databaseReference2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getValue() ==null){ //e7tyat
+
+                            return;
+                        }
+                        Posts posts  =dataSnapshot.getValue(Posts.class);
+
+                        if(!user.getEmail().equals(posts.getAuthorsEmail())) { // to check if the user isn't saying yes to his own post
+                            databaseReference.child("email1").setValue(user.getEmail());
+                            databaseReference.child("name1").setValue(user.getDisplayName());
+                            holder.variableTextViewYesPerson.setText(user.getDisplayName() + " said Yes!");
+                        }
+                        else{
+                            Toast.makeText(mContext,"can't say yes to your own post!",Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+            }
         });
 
 

@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                         Posts postObj = post.getValue(Posts.class);
                         postObj.setPostId(post.getKey());
                         //add a new post to the arrayList with help of the posts class
-                        ItemsArrayList.add(new ListItem(postObj.getCityName(), postObj.getAction(),postObj.getName(),postObj.getDescription(),postObj.getPostId()));
+                        ItemsArrayList.add(new ListItem(postObj.getCityName(), postObj.getAction(),postObj.getName(),postObj.getDescription(),postObj.getPostId(),postObj.getAuthorsEmail()));
 
 
 

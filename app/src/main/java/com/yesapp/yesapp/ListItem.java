@@ -7,18 +7,22 @@ public class ListItem {
     public String UsersName;
     public String Description;
     public String PostId;
+    public String AuthorsEmail;
 
 
 
 
 
-    ListItem(String CityName, String ActionName, String UsersName, String Description, String PostId){
+
+
+    ListItem(String CityName, String ActionName, String UsersName, String Description, String PostId, String AuthorsEmail){
 
         this.CityName=CityName;
         this.ActionName=ActionName;
         this.UsersName=UsersName;
         this.Description =Description;
         this.PostId = PostId;
+        this.AuthorsEmail = AuthorsEmail;
 
     }
 }
