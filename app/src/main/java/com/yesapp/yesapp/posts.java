@@ -7,6 +7,8 @@ public class Posts {
         private String name;
         private String description;
         private String postId;
+        private String AuthorsEmail;
+
 
 
     public String getPostId() {
@@ -55,4 +57,11 @@ public class Posts {
     }
 
 
+    public String getAuthorsEmail() {
+        return AuthorsEmail;
+    }
+
+    public void setAuthorsEmail(String authorsEmail) {
+        this.AuthorsEmail = authorsEmail;
+    }
 }

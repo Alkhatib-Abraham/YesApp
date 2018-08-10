@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -56,6 +57,7 @@ import java.util.ArrayList;
                    holder.variableTextViewUsersName.setText(PostsArrayList.get(position).UsersName);
                    holder.variableTextViewDescription.setText(PostsArrayList.get(position).Description);
                    holder.variableTextViewPostId.setText(PostsArrayList.get(position).PostId);
+                   holder.variableTextViewYesPerson.setText(PostsArrayList.get(position).getYes);
 
 
 
@@ -98,13 +100,36 @@ import java.util.ArrayList;
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                if(user.getEmail().equals(author.email)){
                 DatabaseReference databaseReference = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString()).child("Yes");
-                databaseReference.setValue(user.getEmail());
-                holder.variableTextViewYesPerson.setText(user.getDisplayName()+" said Yes!");
+
+//                //to get the author's email
+//                 final String[] authorsEmail = new String[1];
+//                Posts posts;
+//                DatabaseReference databaseReference2 = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString());
+//                databaseReference2.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        // posts =dataSnapshot.getValue(Posts.class);
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
+                //  if(!user.getEmail().equals()) { // to check if the user isn't saying yes to his own post
+                      databaseReference.setValue(user.getEmail());
+                      holder.variableTextViewYesPerson.setText(user.getDisplayName() + " said Yes!");
+                  }
+                //  else{
+                    //Toast.makeText(mContext,"can't say yes to your own post!",Toast.LENGTH_SHORT).show();
+
+                //  }
 
 
-            }
+           // }
         });
 
 
@@ -140,7 +165,7 @@ import java.util.ArrayList;
             variableTextViewUsersName = (TextView) itemView.findViewById(R.id.variableTextViewUsersName);
             variableTextViewDescription = (TextView) itemView.findViewById(R.id.variableTextViewDescription);
             variableTextViewPostId = (TextView) itemView.findViewById(R.id.variableTextViewPostId);
-            variableTextViewYesPerson =(TextView) itemView.findViewById(R.id.textView3);
+            variableTextViewYesPerson =(TextView) itemView.findViewById(R.id.variableTextViewYesPerson);
             YesBtn                 = (Button) itemView.findViewById(R.id.yesBtn);
 
 

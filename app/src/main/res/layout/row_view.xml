@@ -127,7 +127,7 @@
         app:layout_constraintTop_toBottomOf="@+id/variableTextViewDescription" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/variableTextViewYesPerson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

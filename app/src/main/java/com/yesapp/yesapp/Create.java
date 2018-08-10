@@ -65,9 +65,10 @@ public class Create extends AppCompatActivity {
             post.setAction(action.getText().toString());
             post.setDescription(description.getText().toString().trim());
 
+
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-
+            post.setAuthorsEmail(user.getEmail());
             post.setName(user.getDisplayName());
 
 
