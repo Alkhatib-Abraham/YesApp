@@ -1,7 +1,9 @@
 package com.yesapp.yesapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,16 +32,53 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+
 // This is to read data from a database and place it in a list view
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView mainScreenRecyclerView;           //to contain the posts
     SwipeRefreshLayout swipeRefreshLayout; //to refresh
     private int onBackPressed = 0;         //to track how many times back was pressed
+    public static SharedPreferences sp;//to save if the user has been logged in
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        sp = getSharedPreferences("login", MODE_PRIVATE);
+        if(currentUser ==null){
+
+            if (sp.getBoolean("logged", false)) {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(sp.getString("name", ""),
+                        sp.getString("password","")).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                        } else {
+
+                            sp.edit().putBoolean("logged", false).apply();
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
+                            finish();
+                        }
+                    }
+                });
+            }
+            else{
+                sp.edit().putBoolean("logged", false).apply();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
+                finish();
+                
+
+            }
+            }
+
+
 
 
 

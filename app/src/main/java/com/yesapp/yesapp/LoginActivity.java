@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import static com.yesapp.yesapp.MainActivity.sp;
 import static com.yesapp.yesapp.R.layout.activity_login;
 
 /// This is Sign in and MainActivity for this project
@@ -30,7 +31,6 @@ import static com.yesapp.yesapp.R.layout.activity_login;
 public class LoginActivity extends AppCompatActivity implements ResetPasswordListener {
 
     TextView msg1,msg2;
-    public static SharedPreferences sp;//to save if the user has been logged in
     ProgressBar progressBar;
     Button loginBtn, registerBtn;
     private int onBackPressed = 0;
