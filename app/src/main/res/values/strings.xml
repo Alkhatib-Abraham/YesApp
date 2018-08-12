@@ -18,4 +18,20 @@
         completions."
     </string>
     <string name="title_activity_registeractivity">Registeractivity</string>
+    <string name="need_a_new_account">NEED A NEW ACCOUNT</string>
+    <string name="forget_your_password">Forget your password?</string>
+    <string name="password_must_be_at_least_6_digits">Password must be at least 6 digits</string>
+    <string name="login">Login</string>
+    <string name="invalid_email_please_try_again">Invalid Email, Please try again</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="please_enter_the_password_again">please enter the Password again</string>
+    <string name="password_dosn_t_match">Password dosn\'t match</string>
+    <string name="your_name">Your Name</string>
+    <string name="please_enter_a_name">Please Enter a Name</string>
+    <string name="register">Register</string>
+    <string name="city_name">City Name</string>
+    <string name="post">Post</string>
+    <string name="what_do_you_wanna_do">What do you wanna do</string>
+    <string name="please_enter_a_description_of_your_activity">Please Enter a Description of your Activity</string>
 </resources>

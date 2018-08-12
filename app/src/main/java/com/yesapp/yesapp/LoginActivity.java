@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
         sp = getSharedPreferences("login", MODE_PRIVATE);
         if (sp.getBoolean("logged", false)) {
 
+
              progressBar.setVisibility(View.VISIBLE);
              loginBtn.setEnabled(false);
              registerBtn.setEnabled(false);

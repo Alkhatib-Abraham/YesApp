@@ -8,39 +8,47 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <EditText
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputEditText
         android:id="@+id/loginEmailEdiText"
         android:layout_width="364dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="5dp" />
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/errorMsg4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Invalid Email, Please try again"
+        android:text="@string/invalid_email_please_try_again"
         android:textColor="@android:color/holo_red_dark" />
 
-    <EditText
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputEditText
         android:id="@+id/loginPasswordEdiText"
         android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPersonName"
         android:password="true"
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="51dp" />
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/errorMsg5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Password must be at least 6 digits"
+        android:text="@string/password_must_be_at_least_6_digits"
         android:textColor="@android:color/holo_red_dark" />
 
     <Button
@@ -48,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="login"
-        android:text="Login"
+        android:text="@string/login"
         tools:layout_editor_absoluteX="105dp"
         tools:layout_editor_absoluteY="201dp" />
 
@@ -57,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="goToRegisterActivity"
-        android:text="Register"
+        android:text="@string/need_a_new_account"
         tools:layout_editor_absoluteX="102dp"
         tools:layout_editor_absoluteY="249dp" />
 
@@ -67,13 +75,17 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:gravity="center_horizontal"
-        android:text="Forget your password?"
+        android:text="@string/forget_your_password"
         android:onClick="resetPassword"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:focusable="true" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
+
 </LinearLayout>

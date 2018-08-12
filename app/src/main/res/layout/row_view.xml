@@ -6,7 +6,7 @@
 
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
-    android:background="#E1F5FE"
+    android:background="@color/colorTransparent"
     android:orientation="vertical"
     tools:layout_editor_absoluteY="81dp">
 
