@@ -100,10 +100,14 @@ public class MainActivity extends AppCompatActivity {
         //===================================ToolBar================================================
 
 
+
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
+        mToolbar.setTitle("Yes App Baby!");
+//        mToolbar.setCollapsible(true);
+        mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         setSupportActionBar(mToolbar);
 
-        //getActionBar().setTitle("Yes App");
 
 
     }
