@@ -8,8 +8,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 // This is to read data from a database and place it in a list view
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout; //to refresh
     private int onBackPressed = 0;         //to track how many times back was pressed
     public static SharedPreferences sp;//to save if the user has been logged in
+    private Toolbar mToolbar; //my custom toolbar
 
 
     @Override
@@ -72,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
@@ -89,7 +95,48 @@ public class MainActivity extends AppCompatActivity {
                 refresh();
             }
         });
+
+
+        //===================================ToolBar================================================
+
+
+        mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
+        setSupportActionBar(mToolbar);
+
+        //getActionBar().setTitle("Yes App");
+
+
     }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+         super.onCreateOptionsMenu(menu);
+         getMenuInflater().inflate(R.menu.main_menu,menu);
+         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+         super.onOptionsItemSelected(item);
+
+         if(item.getItemId()==R.id.menu_settings_btn1){
+             //================================Go to the Settings Activity===================================
+                 Intent intent = new Intent(MainActivity.this,Settings.class);
+                 startActivity(intent);
+
+             }
+             else if(item.getItemId()==R.id.menu_settings_btn2){
+             //=============================go to the Create Activity========================================
+                 Intent i = new Intent(MainActivity.this, Create.class);
+                 startActivity(i);
+
+         }
+
+         return true;
+    }
+
     //-------------------------End of the SwipeRefresh Layout Listener------------------------------
 
 
@@ -170,20 +217,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //=============================go to the Create Activity========================================
-    public void goToCreateActivity(View view) {
-        Intent i = new Intent(MainActivity.this, Create.class);
-        startActivity(i);
-    }
-    //----------------------------------------------------------------------------------------------
 
 
-    //================================Go to the Settings Activity===================================
-    public void goToSettingsActivity(View view) {
-        Intent intent = new Intent(MainActivity.this,Settings.class);
-        startActivity(intent);
 
-    }
 
     //this void initialises the RecyclerView
     public void initRecyclerView(ArrayList<ListItem> ItemsArrayList){
