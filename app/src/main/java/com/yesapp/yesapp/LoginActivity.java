@@ -1,6 +1,7 @@
 package com.yesapp.yesapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -32,9 +33,9 @@ import static com.yesapp.yesapp.R.layout.activity_login;
 public class LoginActivity extends AppCompatActivity implements ResetPasswordListener {
 
     TextView msg1,msg2;
-    ProgressBar progressBar;
     Button loginBtn;
     Toolbar mToolbar;
+    ProgressDialog progressDialogLoginProgress;
 
 
     @Override
@@ -43,13 +44,13 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
         setContentView(activity_login);
 
         //preparing for the login====
-        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
-        progressBar.setVisibility(View.INVISIBLE);
         msg1 = (TextView) findViewById(R.id.errorMsg4);
         msg2 = (TextView) findViewById(R.id.errorMsg5);
-        loginBtn = (Button) findViewById(R.id.loginBtn);
+        loginBtn = (Button) findViewById(R.id.loginBtnn);
         msg1.setVisibility(View.GONE);
         msg2.setVisibility(View.GONE);
+
+        progressDialogLoginProgress = new ProgressDialog(LoginActivity.this);
 
 
         //==================The Login Process==========================
@@ -62,8 +63,6 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
         if (sp.getBoolean("logged", false)) {
 
 
-             progressBar.setVisibility(View.VISIBLE);
-             loginBtn.setEnabled(false);
 
 
              FirebaseAuth.getInstance().signInWithEmailAndPassword(sp.getString("name", ""),
@@ -75,7 +74,6 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();
                     } else {
-                        progressBar.setVisibility(View.INVISIBLE);
 
                         Toast.makeText(LoginActivity.this, "password or email is not correct please try again", Toast.LENGTH_SHORT).show();
                         sp.edit().putBoolean("logged", false).apply();
@@ -111,15 +109,17 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
 //===============================The Login Method===================================================
 
     public void login(View view) {
+        progressDialogLoginProgress.setTitle("Logging in");
+        progressDialogLoginProgress.setMessage("You are a few seconds away from the Yes World! please wait...");
+        progressDialogLoginProgress.setCanceledOnTouchOutside(false);
+        progressDialogLoginProgress.show();
         msg1.setVisibility(View.GONE);
         msg2.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
 
 
 // These EditTexts are used when the user places his / her email
 // and password and makes sure that his information is taken into the database
 
-        loginBtn.setEnabled(false);
         EditText log_email = (EditText) findViewById(R.id.loginEmailEdiText);
         EditText log_password = (EditText) findViewById(R.id.loginPasswordEdiText);
 
@@ -132,19 +132,17 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
 
             if(login_password.length() < 6){
                 msg2.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.INVISIBLE);
-                loginBtn.setEnabled(true);
+                progressDialogLoginProgress.dismiss();
                 return;
             }
 
-            progressBar.setVisibility(View.INVISIBLE);
-            loginBtn.setEnabled(true);
+            progressDialogLoginProgress.dismiss();
             return;
         }
         else if(login_password.length() < 6){
             msg2.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.INVISIBLE);
-            loginBtn.setEnabled(true);
+            progressDialogLoginProgress.dismiss();
+
             return;
         }
 
@@ -162,13 +160,14 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     sp.edit().putBoolean("logged", true).apply();
+                    progressDialogLoginProgress.dismiss();
 
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "password or email is not correct please try again", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.INVISIBLE);
-                    loginBtn.setEnabled(true);
+                    progressDialogLoginProgress.dismiss();
+
                 }
             }
         }); //end of the FireBaseAuth
