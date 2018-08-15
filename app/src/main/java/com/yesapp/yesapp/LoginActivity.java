@@ -33,8 +33,7 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
 
     TextView msg1,msg2;
     ProgressBar progressBar;
-    Button loginBtn, registerBtn;
-    private int onBackPressed = 0;
+    Button loginBtn;
     Toolbar mToolbar;
 
 
@@ -49,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
         msg1 = (TextView) findViewById(R.id.errorMsg4);
         msg2 = (TextView) findViewById(R.id.errorMsg5);
         loginBtn = (Button) findViewById(R.id.loginBtn);
-        registerBtn = (Button) findViewById(R.id.registerBtn);
         msg1.setVisibility(View.GONE);
         msg2.setVisibility(View.GONE);
 
@@ -66,7 +64,6 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
 
              progressBar.setVisibility(View.VISIBLE);
              loginBtn.setEnabled(false);
-             registerBtn.setEnabled(false);
 
 
              FirebaseAuth.getInstance().signInWithEmailAndPassword(sp.getString("name", ""),
@@ -103,15 +100,7 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
     }
 
 
-    @Override
-    public void onBackPressed() {
-        Toast.makeText(this, "Press Back again to Exit",Toast.LENGTH_SHORT).show();
-        if(onBackPressed==1){
-            onBackPressed =0;
-            finish();
-        }
-        onBackPressed ++;
-    }
+
 
     //==============================================================================================
     // this function will be lunched when the user presses on the the register button
@@ -131,7 +120,6 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
 // and password and makes sure that his information is taken into the database
 
         loginBtn.setEnabled(false);
-        registerBtn.setEnabled(false);
         EditText log_email = (EditText) findViewById(R.id.loginEmailEdiText);
         EditText log_password = (EditText) findViewById(R.id.loginPasswordEdiText);
 
@@ -146,20 +134,17 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
                 msg2.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.INVISIBLE);
                 loginBtn.setEnabled(true);
-                registerBtn.setEnabled(true);
                 return;
             }
 
             progressBar.setVisibility(View.INVISIBLE);
             loginBtn.setEnabled(true);
-            registerBtn.setEnabled(true);
             return;
         }
         else if(login_password.length() < 6){
             msg2.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
             loginBtn.setEnabled(true);
-            registerBtn.setEnabled(true);
             return;
         }
 
@@ -184,7 +169,6 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
                     Toast.makeText(LoginActivity.this, "password or email is not correct please try again", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.INVISIBLE);
                     loginBtn.setEnabled(true);
-                    registerBtn.setEnabled(true);
                 }
             }
         }); //end of the FireBaseAuth
@@ -225,7 +209,13 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
 
 
     }
+    @Override
+    public void onBackPressed() {
 
+        Intent i = new Intent(LoginActivity.this,StartActivity.class);
+        startActivity(i);
+        finish();
+    }
 
 
 }//end of the Class

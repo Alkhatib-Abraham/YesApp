@@ -58,6 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
 
 // this function will be triggerd when users presses the register button, and putting his details into the database
 
+
+
     public void register(View view) {
         msg1.setVisibility(View.GONE);
         msg2.setVisibility(View.GONE);
@@ -100,6 +102,8 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+
+
         //========================the Register data get added to FireBase==================
         mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(register_email , register_password).addOnCompleteListener(new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
@@ -125,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
 
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        startActivity(new Intent(RegisterActivity.this, StartActivity.class));
                         finish();
                 }
 
@@ -145,4 +149,13 @@ public class RegisterActivity extends AppCompatActivity {
         }); //end of the Auth. prossess
 
     } //end of the register Method
+
+
+    @Override
+    public void onBackPressed() {
+
+        Intent i = new Intent(RegisterActivity.this,StartActivity.class);
+        startActivity(i);
+        finish();
+    }
 }// end of the class

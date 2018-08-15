@@ -42,40 +42,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        //to check for the Login++++++++++++++++++++++++++++++++++
-        FirebaseAuth mAuth;
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        sp = getSharedPreferences("login", MODE_PRIVATE);
-        if(currentUser ==null){
-
-            if (sp.getBoolean("logged", false)) {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(sp.getString("name", ""),
-                        sp.getString("password","")).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                        } else {
-
-                            sp.edit().putBoolean("logged", false).apply();
-                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
-                            finish();
-                        }
-                    }
-                });
-            }
-            else{
-                sp.edit().putBoolean("logged", false).apply();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
-                finish();
+        checkIfLogged();//+++++++++++++Check if Logged+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-            }
-            }
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
         super.onCreate(savedInstanceState);
@@ -112,7 +81,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onResume() {
+        checkIfLogged();
+        super.onResume();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -216,6 +189,41 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //----------------------------------End of refresh()--------------------------------------------
+
+    void checkIfLogged(){
+        //to check for the Login++++++++++++++++++++++++++++++++++
+        FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        sp = getSharedPreferences("login", MODE_PRIVATE);
+        if(currentUser ==null){
+
+            if (sp.getBoolean("logged", false)) {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(sp.getString("name", ""),
+                        sp.getString("password","")).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                        } else {
+
+                            sp.edit().putBoolean("logged", false).apply();
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
+                            finish();
+                        }
+                    }
+                });
+            }
+            else{
+                sp.edit().putBoolean("logged", false).apply();
+                startActivity(new Intent(MainActivity.this, StartActivity.class));
+
+                finish();
+
+
+            }
+        }
+    }
 
 
 

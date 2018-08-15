@@ -111,21 +111,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
 
-    <Button
-        android:id="@+id/registerBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
-        android:background="@color/colorAccent"
-        android:onClick="goToRegisterActivity"
-        android:text="@string/need_a_new_account"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toStartOf="@+id/loginBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
-
     <TextView
         android:id="@+id/resetPassword"
         android:layout_width="match_parent"
@@ -151,11 +136,9 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
