@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
     ProgressBar progressBar;
     Button loginBtn, registerBtn;
     private int onBackPressed = 0;
+    Toolbar mToolbar;
 
 
     @Override
@@ -85,6 +87,18 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
                 }
             });
         }
+
+        //===================================ToolBar================================================
+
+
+
+        mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        mToolbar.setTitle("Login");
+//        mToolbar.setCollapsible(true);
+        mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        setSupportActionBar(mToolbar);
+
 
     }
 

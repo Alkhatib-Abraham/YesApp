@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     String register_usersname;
     private FirebaseAuth mAuth;
     TextView msg1,msg2,msg3,msg22;
+     Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,17 @@ public class RegisterActivity extends AppCompatActivity {
         msg3.setVisibility(View.GONE);
         msg22.setVisibility(View.GONE);
 
+
+        //===================================ToolBar================================================
+
+
+
+        mToolbar = (Toolbar) findViewById(R.id.register_toolbar);
+        mToolbar.setTitle("Create an Account");
+//        mToolbar.setCollapsible(true);
+        mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        setSupportActionBar(mToolbar);
 
     }
 
