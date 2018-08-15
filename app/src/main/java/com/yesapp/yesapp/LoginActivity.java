@@ -71,7 +71,9 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
 
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class) ;
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(mainIntent);
                         finish();
                     } else {
 
@@ -162,7 +164,9 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
                     sp.edit().putBoolean("logged", true).apply();
                     progressDialogLoginProgress.dismiss();
 
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class) ;
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(mainIntent);
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "password or email is not correct please try again", Toast.LENGTH_SHORT).show();

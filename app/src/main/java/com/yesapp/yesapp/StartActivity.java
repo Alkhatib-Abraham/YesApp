@@ -39,13 +39,11 @@ public class StartActivity extends AppCompatActivity {
             case R.id.goToReg :
                  i = new Intent(StartActivity.this,RegisterActivity.class);
                 startActivity(i);
-                finish();
                 break;
 
             case R.id.goToLogin:
                 i = new Intent(StartActivity.this,LoginActivity.class);
                 startActivity(i);
-                finish();
                 break;
 
          default:
