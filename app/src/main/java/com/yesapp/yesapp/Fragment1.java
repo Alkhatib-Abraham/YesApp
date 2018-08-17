@@ -43,7 +43,10 @@ RecyclerView mainScreenRecyclerView;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) { //the view is already created
         super.onViewCreated(view, savedInstanceState);
+
         swipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipeRefreshLayout);
+        refresh();//to load for the first time
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -91,7 +94,7 @@ RecyclerView mainScreenRecyclerView;
 
 
                     }
-                    //initRecyclerView(ItemsArrayList);
+                    initRecyclerView(ItemsArrayList);
                 }}//end of the add On DataChange listener
 
 
@@ -105,14 +108,14 @@ RecyclerView mainScreenRecyclerView;
         swipeRefreshLayout.setRefreshing(false); //stop refreshing
 
     }
-//    public void initRecyclerView(ArrayList<ListItem> ItemsArrayList){
-//
-//        // transfers the ListArray into the RecyclerView with the CustomAdapter
-//        mainScreenRecyclerView = (RecyclerView) getView().findViewById(R.id.RecyclerView0);
-//        RecyclerViewAdapter recyclerViewAdapter= new RecyclerViewAdapter(this,ItemsArrayList);
-//        mainScreenRecyclerView.setAdapter(recyclerViewAdapter);
-//        mainScreenRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//    }
+    public void initRecyclerView(ArrayList<ListItem> ItemsArrayList){
+
+        // transfers the ListArray into the RecyclerView with the CustomAdapter
+        mainScreenRecyclerView = (RecyclerView) getView().findViewById(R.id.RecyclerView0);
+        RecyclerViewAdapter recyclerViewAdapter= new RecyclerViewAdapter(getContext(),ItemsArrayList);
+        mainScreenRecyclerView.setAdapter(recyclerViewAdapter);
+        mainScreenRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+    }
 
 }
