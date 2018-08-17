@@ -91,7 +91,7 @@ public class Settings extends AppCompatActivity {
 
     public void sign_out(View view) {
         FirebaseAuth.getInstance().signOut();
-        MainActivity.sp.edit().putBoolean("logged", false).apply(); //should be fixed in the future to not depend on another activity
+        MainActivity0.sp.edit().putBoolean("logged", false).apply(); //should be fixed in the future to not depend on another activity
         Intent b = new Intent(Settings.this, StartActivity.class);
         b.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);//solves the problem of going back
         startActivity(b);

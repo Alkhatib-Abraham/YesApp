@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout0);
         refresh(); //to get the new content
 
 
@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 if (dataSnapshot.getValue()!=null) {
                     Iterable<DataSnapshot> posts = dataSnapshot.getChildren(); //get all posts
 
+
 //                    //pulls from the cloud
 //                    HashMap<String, Posts> results = dataSnapshot.getValue(new GenericTypeIndicator<HashMap<String, Posts>>() {
 //                    });
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Posts postObj = post.getValue(Posts.class);
                         postObj.setPostId(post.getKey());
+
                         //add a new post to the arrayList with help of the posts class
                         ItemsArrayList.add(new ListItem(postObj.getCityName(), postObj.getAction(),postObj.getName(),postObj.getDescription(),postObj.getPostId(),postObj.getAuthorsEmail()));
 

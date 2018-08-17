@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity implements ResetPasswordLis
                     sp.edit().putBoolean("logged", true).apply();
                     progressDialogLoginProgress.dismiss();
 
-                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class) ;
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity0.class) ;
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(mainIntent);
                     finish();

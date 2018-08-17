@@ -1,10 +1,21 @@
 package com.yesapp.yesapp;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity0 extends AppCompatActivity {
 
@@ -12,6 +23,7 @@ public class MainActivity0 extends AppCompatActivity {
     SectionsPagerAdapter mSectionPagerAdapter;
     TabLayout mTabLayout;
     Toolbar mToolbar;
+    static SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +52,76 @@ public class MainActivity0 extends AppCompatActivity {
 
 
 
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if(item.getItemId()==R.id.menu_settings_btn1){
+            //================================Go to the Settings Activity===================================
+            Intent intent = new Intent(MainActivity0.this,Settings.class);
+            startActivity(intent);
+
+        }
+        else if(item.getItemId()==R.id.menu_settings_btn2){
+            //=============================go to the Create Activity========================================
+            Intent i = new Intent(MainActivity0.this, Create.class);
+            startActivity(i);
+
+        }
+
+        return true;
+    }
+    @Override
+    protected void onResume() {
+        checkIfLogged();
+        super.onResume();
+    }
+
+    //-------------------------End of the SwipeRefresh Layout Listener------------------------------
+
+    void checkIfLogged(){
+        //to check for the Login++++++++++++++++++++++++++++++++++
+        FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        sp = getSharedPreferences("login", MODE_PRIVATE);
+        if(currentUser ==null){
+
+            if (sp.getBoolean("logged", false)) {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(sp.getString("name", ""),
+                        sp.getString("password","")).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                        } else {
+
+                            sp.edit().putBoolean("logged", false).apply();
+                            startActivity(new Intent(MainActivity0.this, LoginActivity.class));
+
+                            finish();
+                        }
+                    }
+                });
+            }
+            else{
+                sp.edit().putBoolean("logged", false).apply();
+                startActivity(new Intent(MainActivity0.this, StartActivity.class));
+
+                finish();
+
+
+            }
+        }
     }
 }
