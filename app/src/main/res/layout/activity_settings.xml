@@ -127,7 +127,7 @@
 
     <Button
         android:id="@+id/sign_out"
-        android:layout_width="119dp"
+        android:layout_width="143dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/post_btn"
         android:layout_centerHorizontal="true"
@@ -139,6 +139,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/changeImageBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="changeImage"
+        android:text="Change Photo"
+        app:layout_constraintEnd_toEndOf="@+id/sign_out"
+        app:layout_constraintStart_toStartOf="@+id/sign_out"
+        tools:layout_editor_absoluteY="462dp" />
 
 
 </android.support.constraint.ConstraintLayout>

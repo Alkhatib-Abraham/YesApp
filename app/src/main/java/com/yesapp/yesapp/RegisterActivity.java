@@ -16,6 +16,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 // This is the register Activity
 public class RegisterActivity extends AppCompatActivity {
@@ -116,6 +120,18 @@ public class RegisterActivity extends AppCompatActivity {
 
                     Toast.makeText(RegisterActivity.this, "Succesful", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
+
+                    String uid =user.getUid();
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReference =  firebaseDatabase.getReference().child("users").child(uid);
+                    HashMap<String,String> userMap = new HashMap<>();
+                    userMap.put("status","Hey there, I am a member of the Yes Family");
+                    userMap.put("image","default");
+                    userMap.put("thumb_image","default");
+
+                    databaseReference.setValue(userMap);
+
+
 
                     //to add the register usersname
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()

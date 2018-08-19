@@ -21,6 +21,7 @@ public class Settings extends AppCompatActivity {
     TextView nametxtview;
     Button changeNameBtn;
     EditText newNameText;
+    public static final int GALLERY_PICK =1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,8 @@ public class Settings extends AppCompatActivity {
         }
     }
 
+
+
     public void sign_out(View view) {
         FirebaseAuth.getInstance().signOut();
         MainActivity0.sp.edit().putBoolean("logged", false).apply(); //should be fixed in the future to not depend on another activity
@@ -96,6 +99,16 @@ public class Settings extends AppCompatActivity {
         b.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);//solves the problem of going back
         startActivity(b);
         finish();
+
+    }
+
+    public void changeImage(View view) {
+
+        Intent gallary_intent = new Intent();
+        gallary_intent.setType("image/*");
+        gallary_intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(gallary_intent,"SELECT IMAGE"),GALLERY_PICK);
+
 
     }
 }
