@@ -1,4 +1,4 @@
-package com.yesapp.yesapp;
+package com.yesapp.yesapp.classes;
 
 public class ListItem {
 
@@ -15,7 +15,7 @@ public class ListItem {
 
 
 
-    ListItem(String CityName, String ActionName, String UsersName, String Description, String PostId, String AuthorsEmail){
+    public ListItem(String CityName, String ActionName, String UsersName, String Description, String PostId, String AuthorsEmail){
 
         this.CityName=CityName;
         this.ActionName=ActionName;

@@ -1,7 +1,9 @@
-package com.yesapp.yesapp;
+package com.yesapp.yesapp.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.yesapp.yesapp.R;
 
 public class ChatActivity extends AppCompatActivity {
 

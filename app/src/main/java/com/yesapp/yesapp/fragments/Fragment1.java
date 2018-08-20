@@ -1,4 +1,4 @@
-package com.yesapp.yesapp;
+package com.yesapp.yesapp.fragments;
 
 
 import android.os.Bundle;
@@ -11,13 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.yesapp.yesapp.classes.ListItem;
+import com.yesapp.yesapp.classes.Posts;
+import com.yesapp.yesapp.R;
+import com.yesapp.yesapp.viewInflatorsAdapters.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 

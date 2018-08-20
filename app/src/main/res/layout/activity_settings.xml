@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
-    tools:context=".Settings"
+    tools:context=".activities.Settings"
     tools:layout_editor_absoluteY="81dp">
 
     <de.hdodenhof.circleimageview.CircleImageView

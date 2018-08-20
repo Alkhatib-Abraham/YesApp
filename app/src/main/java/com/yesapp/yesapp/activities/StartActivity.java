@@ -1,10 +1,12 @@
-package com.yesapp.yesapp;
+package com.yesapp.yesapp.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.yesapp.yesapp.R;
 
 public class StartActivity extends AppCompatActivity {
 

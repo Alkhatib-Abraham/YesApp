@@ -1,4 +1,4 @@
-package com.yesapp.yesapp;
+package com.yesapp.yesapp.classes;
 
 public class Posts {
     //this class defines a blueprint of the post and the needed setters and getters

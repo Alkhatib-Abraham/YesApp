@@ -1,4 +1,4 @@
-package com.yesapp.yesapp;
+package com.yesapp.yesapp.viewInflatorsAdapters;
 
 public interface ResetPasswordListener {
 

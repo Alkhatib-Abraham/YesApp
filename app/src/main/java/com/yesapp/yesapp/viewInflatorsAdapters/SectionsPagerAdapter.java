@@ -1,10 +1,14 @@
-package com.yesapp.yesapp;
+package com.yesapp.yesapp.viewInflatorsAdapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-class SectionsPagerAdapter extends FragmentPagerAdapter {
+import com.yesapp.yesapp.fragments.Fragment1;
+import com.yesapp.yesapp.fragments.Fragment2;
+import com.yesapp.yesapp.fragments.Fragment3;
+
+public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);

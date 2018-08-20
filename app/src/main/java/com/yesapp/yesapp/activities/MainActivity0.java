@@ -1,4 +1,4 @@
-package com.yesapp.yesapp;
+package com.yesapp.yesapp.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.yesapp.yesapp.R;
+import com.yesapp.yesapp.viewInflatorsAdapters.SectionsPagerAdapter;
 
 public class MainActivity0 extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.yesapp.yesapp;
+package com.yesapp.yesapp.fragments;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+
+import com.yesapp.yesapp.R;
+import com.yesapp.yesapp.viewInflatorsAdapters.ResetPasswordListener;
 
 //for info pls check https://www.youtube.com/watch?v=ARezg1D9Zd0
 

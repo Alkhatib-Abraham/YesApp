@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/blue_logo2"
-    tools:context=".StartActivity">
+    tools:context=".activities.StartActivity">
 
     <Button
         android:id="@+id/goToLogin"
