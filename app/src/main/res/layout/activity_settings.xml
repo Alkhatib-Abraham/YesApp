@@ -7,7 +7,7 @@
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     tools:context=".activities.Settings"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="25dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/settings_image"
@@ -15,7 +15,7 @@
         android:layout_height="180dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/bild"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,20 +24,19 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="0dp"
+        android:layout_width="141dp"
         android:layout_height="29dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="440dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/white"
         android:onClick="openEdit"
         android:text="CHANGE NAME"
-        app:layout_constraintEnd_toEndOf="@+id/changeImageBtn"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/changeImageBtn"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/changeImageBtn"
+        app:layout_constraintEnd_toEndOf="@+id/sign_out"
+        app:layout_constraintStart_toStartOf="@+id/sign_out" />
 
-<!--
+    <!--
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -50,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 -->
-<!--
+    <!--
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -64,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
     -->
 
-<!--
+    <!--
     <TextView
         android:id="@+id/textView"
         android:layout_width="77dp"
@@ -86,14 +85,13 @@
         android:layout_height="28dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/white"
         android:onClick="changeStatus"
         android:text="CHANGE STATUS"
-        app:layout_constraintEnd_toEndOf="@+id/button4"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/button4"
-        tools:layout_editor_absoluteY="404dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintEnd_toEndOf="@+id/sign_out"
+        app:layout_constraintStart_toStartOf="@+id/sign_out" />
 
     <TextView
         android:id="@+id/textView5"
@@ -102,11 +100,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="John Stiuart"
+        android:text="John Stewart"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/settings_image"
-        app:layout_constraintStart_toStartOf="@+id/settings_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_image" />
 
 
@@ -121,7 +119,6 @@
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -129,9 +126,10 @@
         android:id="@+id/textInputLayout3"
         android:layout_width="wrap_content"
         android:layout_height="53dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/editText"
@@ -154,7 +152,7 @@
         android:layout_height="43dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/white"
         android:onClick="changeName"
@@ -163,8 +161,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout3" />
 
     <Button
         android:id="@+id/sign_out"
@@ -172,7 +169,7 @@
         android:layout_height="45dp"
         android:layout_above="@+id/post_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@color/colorAccent"
@@ -181,24 +178,19 @@
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/changeImageBtn"
-        android:layout_width="0dp"
+        android:layout_width="143dp"
         android:layout_height="28dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
         android:background="@android:color/white"
         android:onClick="changeImage"
         android:text="Change Photo"
         app:layout_constraintBottom_toTopOf="@+id/sign_out"
         app:layout_constraintEnd_toEndOf="@+id/sign_out"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/sign_out"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="@+id/sign_out" />
 
 
 </android.support.constraint.ConstraintLayout>

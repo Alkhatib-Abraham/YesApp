@@ -139,8 +139,8 @@ public class Settings extends AppCompatActivity {
 //        gallary_intent.setType("image/*");
 //        gallary_intent.setAction(Intent.ACTION_GET_CONTENT);
 //        startActivityForResult(Intent.createChooser(gallary_intent,"SELECT IMAGE"),GALLERY_PICK);
-        //start picker to get image for cropping and then use the image in cropping activity
-       CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(Settings.this);
+        //start picker to get image for cropping and then use the image in cropping activity]7p
+       CropImage.activity().setAspectRatio(1,1).setGuidelines(CropImageView.Guidelines.ON).start(Settings.this);
 
 
     }
@@ -148,12 +148,14 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
-            Uri imageUri = data.getData();
-            CropImage.activity(imageUri).setAspectRatio(1, 1).start(this);
-        }
+//        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
+//            Uri imageUri = data.getData();
+//            CropImage.activity(imageUri).setAspectRatio(1, 1).start(this);
+//        }
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+//            Uri imageUri = data.getData();
+//            CropImage.activity(imageUri).setAspectRatio(1, 1).start(this);
 
         }
         CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -181,6 +183,16 @@ public class Settings extends AppCompatActivity {
         }
 
     public void changeStatus(View view) {
+
+        if (changeNameBtn.getVisibility() == View.GONE) {
+            changeNameBtn.setVisibility(View.VISIBLE);
+            newNameText.setVisibility(View.VISIBLE);
+
+        } else {
+            changeNameBtn.setVisibility(View.GONE);
+            newNameText.setVisibility(View.GONE);
+        }
+
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference().child("users").child(userId).child("status");
         databaseReference.addValueEventListener(new ValueEventListener() {
