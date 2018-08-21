@@ -28,6 +28,8 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.yesapp.yesapp.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Settings extends AppCompatActivity {
 
     TextView nametxtview,statusTextView;
@@ -35,6 +37,7 @@ public class Settings extends AppCompatActivity {
     EditText newNameText;
     public static final int GALLERY_PICK = 1;
     String userId = "";
+    CircleImageView circleImageView;
 
     //StorageReference for saving the Image
     private StorageReference mStorageRef;
@@ -51,6 +54,7 @@ public class Settings extends AppCompatActivity {
         changeNameBtn = (Button) findViewById(R.id.changeNameBtn);
         statusTextView = (TextView) findViewById(R.id.textView6);
 
+         circleImageView = (CircleImageView) findViewById(R.id.settings_image);
 
         changeNameBtn.setVisibility(View.GONE);
         newNameText.setVisibility(View.GONE);
@@ -59,6 +63,19 @@ public class Settings extends AppCompatActivity {
         nametxtview.setText(user.getDisplayName());
        // emailtxtview.setText(user.getEmail()); unnecessary
         userId = user.getUid();
+
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference file_path = mStorageRef.child("profile_images").child("profile_image.jpg");
+        /*
+        Get the Image Uri from the users's tree brunch Uri
+        -- maybe get the thumbnail for a faster onCreate
+         */
+
+      //  circleImageView.setImageURI(file_path.getFile(ImageUri));
+            // TODO: Get The Image proparly and save it somewhere for fast loading
+
+
+
 
 
     }
@@ -160,7 +177,7 @@ public class Settings extends AppCompatActivity {
         }
         CropImage.ActivityResult result = CropImage.getActivityResult(data);
         if (resultCode == RESULT_OK) {
-            Uri resultUri = result.getUri();
+            final Uri resultUri = result.getUri();
             Toast.makeText(this, resultUri.toString(), Toast.LENGTH_LONG).show();
             mStorageRef = FirebaseStorage.getInstance().getReference();
                             StorageReference file_path = mStorageRef.child("profile_images").child("profile_image.jpg");
@@ -168,7 +185,9 @@ public class Settings extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()){
+
                             Toast.makeText(Settings.this,"Image Uploaded Successfully",Toast.LENGTH_SHORT).show();
+                            circleImageView.setImageURI(resultUri);
 
                         }
                         else{
