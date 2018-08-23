@@ -1,5 +1,6 @@
 package com.yesapp.yesapp.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     TextView msg1,msg2,msg3,msg22;
      Toolbar mToolbar;
-
+ProgressDialog registerProgressDialoge;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,9 @@ public class RegisterActivity extends AppCompatActivity {
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         setSupportActionBar(mToolbar);
 
+        registerProgressDialoge = new ProgressDialog(RegisterActivity.this);
+
+
     }
 
 
@@ -66,6 +70,10 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public void register(View view) {
+        registerProgressDialoge.setTitle("Creating Your Account!");
+        registerProgressDialoge.setMessage("You are a few seconds away from the Yes World! please wait...");
+        registerProgressDialoge.setCanceledOnTouchOutside(false);
+        registerProgressDialoge.show();
         msg1.setVisibility(View.GONE);
         msg2.setVisibility(View.GONE);
         msg3.setVisibility(View.GONE);
@@ -130,7 +138,12 @@ public class RegisterActivity extends AppCompatActivity {
                     userMap.put("image","default");
                     userMap.put("thumb_image","default");
 
-                    databaseReference.setValue(userMap);
+                    databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
 
 
 
@@ -146,11 +159,13 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
 
+                    registerProgressDialoge.dismiss();
                         startActivity(new Intent(RegisterActivity.this, StartActivity.class));
                         finish();
                 }
 
                 else {
+                    registerProgressDialoge.dismiss();
                     // if email already registerd
                     if (task.getException().getMessage().equals("The email address is already in use by another account.")) {
                         Toast.makeText(RegisterActivity.this, "Already Registered", Toast.LENGTH_SHORT).show();

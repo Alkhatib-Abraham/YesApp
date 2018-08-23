@@ -1,10 +1,11 @@
 package com.yesapp.yesapp.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,9 +25,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.yesapp.yesapp.R;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,12 +39,16 @@ public class Settings extends AppCompatActivity {
     TextView nametxtview,statusTextView;
     Button changeNameBtn;
     EditText newNameText;
-    public static final int GALLERY_PICK = 1;
+   // public static final int GALLERY_PICK = 1;
     String userId = "";
     CircleImageView circleImageView;
+    FirebaseDatabase firebaseDatabase;
 
-    //StorageReference for saving the Image
-    private StorageReference mStorageRef;
+    ProgressDialog mProgressDialog;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,24 +56,77 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
 
-        nametxtview = (TextView) findViewById(R.id.textView5);
+        //Declare the Views in the Settings Activity Screen
+        nametxtview = findViewById(R.id.textView5);
         //TextView emailtxtview = (TextView) findViewById(R.id.textView6); unnecessary
-        newNameText = (EditText) findViewById(R.id.editText);
-        changeNameBtn = (Button) findViewById(R.id.changeNameBtn);
-        statusTextView = (TextView) findViewById(R.id.textView6);
+        newNameText = findViewById(R.id.editText);
+        changeNameBtn = findViewById(R.id.changeNameBtn);
+        statusTextView = findViewById(R.id.textView6);
+         circleImageView = findViewById(R.id.settings_image);
 
-         circleImageView = (CircleImageView) findViewById(R.id.settings_image);
 
+         //gets activated whenever the Change Name Button is pressed
         changeNameBtn.setVisibility(View.GONE);
         newNameText.setVisibility(View.GONE);
 
+        //gets the crrent user and his ID so we can get his settings
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
         nametxtview.setText(user.getDisplayName());
-       // emailtxtview.setText(user.getEmail()); unnecessary
         userId = user.getUid();
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference file_path = mStorageRef.child("profile_images").child("profile_image.jpg");
+        StorageReference storageReference;
+        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference.child("profile_images").child(userId+".jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if(task.isSuccessful()){
+
+                    Picasso.get().load(task.getResult()).into(circleImageView);
+
+                    //error Object not found
+                }
+            }
+        });
+
+        //ToDO: get The download Url properly!
+
+        //load the settings
+        firebaseDatabase =FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("users").child(userId);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String status = dataSnapshot.child("status").getValue().toString();
+                String image = dataSnapshot.child("image").getValue().toString();
+                String thumb_image = dataSnapshot.child("status").getValue().toString();
+
+                statusTextView.setText(status);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        // get the status and the image
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("users").child(userId);
+        databaseReference.child("status").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                statusTextView.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         /*
         Get the Image Uri from the users's tree brunch Uri
         -- maybe get the thumbnail for a faster onCreate
@@ -98,6 +159,7 @@ public class Settings extends AppCompatActivity {
         final FirebaseUser user = mAuth.getCurrentUser();
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(newNameText.getText().toString()).build();
+        assert user != null;
         user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -108,20 +170,7 @@ public class Settings extends AppCompatActivity {
                 }
             }
         });
-        // get the status and the image
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("users").child(userId).child("status");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                statusTextView.setText(dataSnapshot.getValue().toString());
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
         changeNameBtn.setVisibility(View.GONE);
@@ -152,6 +201,7 @@ public class Settings extends AppCompatActivity {
 
     public void changeImage(View view) {
 
+
 //        Intent gallary_intent = new Intent();
 //        gallary_intent.setType("image/*");
 //        gallary_intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -170,34 +220,59 @@ public class Settings extends AppCompatActivity {
 //            CropImage.activity(imageUri).setAspectRatio(1, 1).start(this);
 //        }
 
+        CropImage.ActivityResult result = null;
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
 //            Uri imageUri = data.getData();
 //            CropImage.activity(imageUri).setAspectRatio(1, 1).start(this);
+            result = CropImage.getActivityResult(data);
 
         }
-        CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
         if (resultCode == RESULT_OK) {
+            mProgressDialog = new ProgressDialog(Settings.this);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+            mProgressDialog.setTitle("Uploading Image...");
+            mProgressDialog.setMessage("Your awesome Image is on it's way to the Yes world!");
+            mProgressDialog.show();
+
+            assert result != null;
             final Uri resultUri = result.getUri();
-            Toast.makeText(this, resultUri.toString(), Toast.LENGTH_LONG).show();
-            mStorageRef = FirebaseStorage.getInstance().getReference();
-                            StorageReference file_path = mStorageRef.child("profile_images").child("profile_image.jpg");
+            StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+                            final StorageReference file_path = mStorageRef.child("profile_images").child(userId);
                 file_path.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()){
 
-                            Toast.makeText(Settings.this,"Image Uploaded Successfully",Toast.LENGTH_SHORT).show();
-                            circleImageView.setImageURI(resultUri);
+
+                            final String download_url = file_path.getDownloadUrl().toString();
+
+
+                            FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
+                            DatabaseReference databaseReference1 = firebaseDatabase1.getReference().child(userId+"jpg");
+                            databaseReference1.child("image").setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if(task.isSuccessful()) {
+                                       //circleImageView.setImageURI(Uri.parse(download_url));
+                                        mProgressDialog.dismiss();
+                                    }
+                                }
+                            });
+
 
                         }
                         else{
+                            mProgressDialog.dismiss();
                             Toast.makeText(Settings.this,"Error, please try Again!",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
+            assert result != null;
+            Exception error = result.getError();
             }
         }
 
@@ -217,7 +292,7 @@ public class Settings extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                statusTextView.setText(dataSnapshot.getValue().toString());
+                statusTextView.setText(Objects.requireNonNull(dataSnapshot.getValue()).toString());
             }
 
             @Override
