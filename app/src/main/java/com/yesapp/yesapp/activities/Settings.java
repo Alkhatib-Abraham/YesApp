@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,20 +70,22 @@ public class Settings extends AppCompatActivity {
         changeNameBtn.setVisibility(View.GONE);
         newNameText.setVisibility(View.GONE);
 
+
         //gets the crrent user and his ID so we can get his settings
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         nametxtview.setText(user.getDisplayName());
         userId = user.getUid();
 
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference;
-        storageReference = FirebaseStorage.getInstance().getReference();
-        storageReference.child("profile_images").child(userId+".jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+        storageReference = firebaseStorage.getReference();
+        storageReference.child("profile_images").child(userId).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 if(task.isSuccessful()){
 
-                    Picasso.get().load(task.getResult()).into(circleImageView);
+                    Picasso.get().load(task.getResult().toString()).into(circleImageView);
 
                     //error Object not found
                 }
@@ -97,11 +100,11 @@ public class Settings extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String status = dataSnapshot.child("status").getValue().toString();
-                String image = dataSnapshot.child("image").getValue().toString();
-                String thumb_image = dataSnapshot.child("status").getValue().toString();
+//                String status = dataSnapshot.child("status").getValue().toString();
+//                String image = dataSnapshot.child("image").getValue().toString();
+               // String thumb_image = dataSnapshot.child("status").getValue().toString();
 
-                statusTextView.setText(status);
+               // statusTextView.setText(status);
 
             }
 
@@ -117,7 +120,7 @@ public class Settings extends AppCompatActivity {
         databaseReference.child("status").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                statusTextView.setText(dataSnapshot.getValue().toString());
+                //statusTextView.setText(dataSnapshot.getValue().toString());fsdpojpoas u[cjuwr0jc8rucrju0wj09ucw90
             }
 
             @Override
@@ -249,8 +252,8 @@ public class Settings extends AppCompatActivity {
 
 
                             FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
-                            DatabaseReference databaseReference1 = firebaseDatabase1.getReference().child(userId+"jpg");
-                            databaseReference1.child("image").setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            DatabaseReference databaseReference1 = firebaseDatabase1.getReference();
+                            databaseReference1.child(userId).setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
