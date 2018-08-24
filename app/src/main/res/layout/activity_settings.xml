@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/blue_logo2"
     android:orientation="vertical"
     tools:context=".activities.Settings"
     tools:layout_editor_absoluteY="25dp">
@@ -15,8 +15,8 @@
         android:layout_height="180dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/bild"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/no_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,6 +32,7 @@
         android:background="@android:color/white"
         android:onClick="changeName"
         android:text="CHANGE NAME"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/changeImageBtn"
         app:layout_constraintEnd_toEndOf="@+id/sign_out"
         app:layout_constraintStart_toStartOf="@+id/sign_out" />
@@ -89,6 +90,7 @@
         android:background="@android:color/white"
         android:onClick="changeStatus"
         android:text="CHANGE STATUS"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="@+id/sign_out"
         app:layout_constraintStart_toStartOf="@+id/sign_out" />
@@ -147,6 +149,7 @@
         android:background="@android:color/white"
         android:onClick="changeImage"
         android:text="Change Photo"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/sign_out"
         app:layout_constraintEnd_toEndOf="@+id/sign_out"
         app:layout_constraintStart_toStartOf="@+id/sign_out" />
