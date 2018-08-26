@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 import com.yesapp.yesapp.classes.ListItem;
 import com.yesapp.yesapp.activities.PostView;
 import com.yesapp.yesapp.classes.Posts;
@@ -25,7 +26,9 @@ import com.yesapp.yesapp.R;
 
 import java.util.ArrayList;
 
- public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
 
     private static final String TAG = "RecylerViewAdapter"; // for Debugging
@@ -59,15 +62,33 @@ import java.util.ArrayList;
                    holder.variableTextViewUsersName.setText(PostsArrayList.get(position).UsersName);
                    holder.variableTextViewDescription.setText(PostsArrayList.get(position).Description);
                    holder.variableTextViewPostId.setText(PostsArrayList.get(position).PostId);
+
                    //to get people who said Yes
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference databaseReference = database.getReference("posts/" +PostsArrayList.get(position).PostId+"/Yes/name1");
+        final DatabaseReference databaseReference = database.getReference("posts/" +PostsArrayList.get(position).PostId);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                   if(dataSnapshot.getValue() !=null) {
-               holder.variableTextViewYesPerson.setText(dataSnapshot.getValue().toString()+" said Yes!");
+                   if(dataSnapshot.child("/Yes/name1").getValue()!=null) {
+               holder.variableTextViewYesPerson.setText(dataSnapshot.child("/Yes/name1").getValue().toString()+" said Yes!");
                    }
+               String authorsUid =dataSnapshot.child("authorsEmail").getValue().toString();
+
+               DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("users").child(authorsUid).child("thumb_image");
+               databaseReference1.addValueEventListener(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                       Picasso.get().load(dataSnapshot.getValue().toString()).into(holder.imageView);
+
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                   }
+               });
+
+
             }
 
             @Override
@@ -190,6 +211,7 @@ import java.util.ArrayList;
       TextView variableTextViewPostId;
       TextView variableTextViewYesPerson;
       Button YesBtn;
+      CircleImageView imageView;
 
 
         public ViewHolder(View itemView){
@@ -201,6 +223,7 @@ import java.util.ArrayList;
             variableTextViewPostId = (TextView) itemView.findViewById(R.id.variableTextViewPostId);
             variableTextViewYesPerson =(TextView) itemView.findViewById(R.id.variableTextViewYesPerson);
             YesBtn                 = (Button) itemView.findViewById(R.id.yesBtn);
+             imageView = (CircleImageView) itemView.findViewById(R.id.variableImageView);
 
 
         }
