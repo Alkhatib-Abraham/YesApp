@@ -2,10 +2,13 @@ package com.yesapp.yesapp.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +32,14 @@ import com.yesapp.yesapp.R;
 import com.yesapp.yesapp.fragments.ChangeName;
 import com.yesapp.yesapp.fragments.ChangeStatus;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class Settings extends AppCompatActivity {
 
@@ -39,7 +49,7 @@ public class Settings extends AppCompatActivity {
    static CircleImageView circleImageView;
     FirebaseDatabase firebaseDatabase;
     ProgressDialog mProgressDialog;
-
+     Toolbar mToolbar;
 
 
 
@@ -48,6 +58,13 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+
+        mToolbar = (Toolbar) findViewById(R.id.settingsToolbar);
+        mToolbar.setTitle("User's Settings");
+        mToolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimary));
+        mToolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
+        setSupportActionBar(mToolbar);
 
 
         //Declare the Views in the Settings Activity Screen
@@ -78,14 +95,19 @@ public class Settings extends AppCompatActivity {
             FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
             StorageReference storageReference;
             storageReference = firebaseStorage.getReference();
-            storageReference.child("profile_images").child(userId).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            storageReference.child("profile_images").child(userId+".jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
 
-                        Picasso.get().load(task.getResult().toString()).into(circleImageView);
+                        if(task.getResult().toString().equals("default"))
+                        {
+                            Picasso.get().load(R.drawable.no_avatar).placeholder(R.drawable.no_avatar).into(circleImageView);
 
-                        //error Object not found
+                        }
+                        else {
+                            Picasso.get().load(task.getResult().toString()).placeholder(R.drawable.no_avatar).into(circleImageView);
+                        }
                     }
                 }
             });
@@ -185,29 +207,114 @@ public class Settings extends AppCompatActivity {
 
             assert result != null;
             final Uri resultUri = result.getUri();
+            File thumbFilePath =new File(resultUri.getPath());
+
+
+            Bitmap thumb_bitmap = null;
+            try {
+                thumb_bitmap = new Compressor(this)
+                        .setMaxWidth(200).setMaxHeight(200).setQuality(75).compressToBitmap(thumbFilePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                final byte[] thumb_byte = baos.toByteArray();
+
+
+
             StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-                            final StorageReference file_path = mStorageRef.child("profile_images").child(userId);
-                file_path.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            final StorageReference file_path = mStorageRef.child("profile_images").child(userId+".jpg");
+            final StorageReference thumb_file_path = mStorageRef.child("profile_images").child("thumbs").child(userId+".jpg");
+
+
+
+            file_path.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()){
 
 
-                            final String download_url = file_path.getDownloadUrl().toString();
 
 
-                            FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
-                            DatabaseReference databaseReference1 = firebaseDatabase1.getReference();
-                            databaseReference1.child(userId).setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
+
+
+                                    //when we are done with main pic upload we wanna uplode the Thumbnail
+                            UploadTask uploadTask = thumb_file_path.putBytes(thumb_byte);
+
+                            uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                                    if(task.isSuccessful()) {
-                                        mProgressDialog.dismiss();
-                                        refreshSettings(1); //load the new pic
+
+                                    if(task.isSuccessful()){
+
+                                        Task<Uri> file_downloadLink =file_path.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Uri> task) {
+                                                if (task.isSuccessful()) {
+                                                    final Uri imageUri = task.getResult();
+
+                                                    Task<Uri> thumb_downloadLink = file_path.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Uri> task) {
+
+                                                            if (task.isSuccessful()) {
+                                                                Uri thumbUri = task.getResult();
+
+                                                                firebaseDatabase = FirebaseDatabase.getInstance();
+                                                                final DatabaseReference databaseReference = firebaseDatabase.getReference().child("users").child(userId);
+
+                                                                Map<String, Object> linksMap = new HashMap<>();
+                                                                linksMap.put("image", thumbUri.toString());
+                                                                linksMap.put("thumb_image", imageUri.toString());
+                                                                databaseReference.updateChildren(linksMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            mProgressDialog.dismiss();
+                                                                            refreshSettings(1); //load the new pic
+                                                                        } else {
+                                                                            mProgressDialog.dismiss();
+                                                                            Toast.makeText(Settings.this, "Error, please try Again!", Toast.LENGTH_SHORT).show();
+
+                                                                        }
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                mProgressDialog.dismiss();
+                                                                Toast.makeText(Settings.this, "Error, please try Again!", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
+
+                                                }
+
+                                                else{
+                                                    mProgressDialog.dismiss();
+                                                    Toast.makeText(Settings.this,"Error, please try Again!",Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            }});
+
+
+
+
+
+
                                     }
+                                    else{
+                                        mProgressDialog.dismiss();
+                                        Toast.makeText(Settings.this,"Error, please try Again!",Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
                             });
+
+
 
 
                         }
