@@ -164,8 +164,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         }
                         Posts posts  =dataSnapshot.getValue(Posts.class);
 
-                        if(!user.getEmail().equals(posts.getAuthorsEmail())) { // to check if the user isn't saying yes to his own post
-                            databaseReference.child("email1").setValue(user.getEmail());
+                        if(!user.getUid().equals(posts.getAuthorsEmail())) { // to check if the user isn't saying yes to his own post
+                            databaseReference.child("email1").setValue(user.getUid());
                             databaseReference.child("name1").setValue(user.getDisplayName());
                             holder.variableTextViewYesPerson.setText(user.getDisplayName() + " said Yes!");
                         }

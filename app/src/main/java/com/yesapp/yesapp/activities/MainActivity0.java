@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +27,8 @@ public class MainActivity0 extends AppCompatActivity {
     TabLayout mTabLayout;
     Toolbar mToolbar;
     static SharedPreferences sp;
+    private int onBackPressed = 0;         //to track how many times back was pressed
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,4 +129,17 @@ public class MainActivity0 extends AppCompatActivity {
             }
         }
     }
+
+    //================================to prevent unwanted exiting of the app========================
+    @Override
+    public void onBackPressed() {
+
+        Toast.makeText(this, "Press Back again to Exit",Toast.LENGTH_SHORT).show();
+        if(onBackPressed==1){
+            onBackPressed =0;
+            super.onBackPressed();
+        }
+        onBackPressed ++;
+    }
+    //---
 }
