@@ -19,6 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.yesapp.yesapp.activities.MainActivity0;
+import com.yesapp.yesapp.activities.ProfileActivity;
+import com.yesapp.yesapp.activities.StartActivity;
 import com.yesapp.yesapp.classes.ListItem;
 import com.yesapp.yesapp.activities.PostView;
 import com.yesapp.yesapp.classes.Posts;
@@ -184,6 +187,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
+            }
+        });
+
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(mContext, ProfileActivity.class);
+                 mContext.startActivity(i);
             }
         });
 
