@@ -20,7 +20,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:clickable="true"
-        android:focusable="true"/>
+        android:focusable="true" />
+
+
 
     <TextView
         android:id="@+id/variableTextViewUsersName"

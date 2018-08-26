@@ -66,8 +66,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                    holder.variableTextViewDescription.setText(PostsArrayList.get(position).Description);
                    holder.variableTextViewPostId.setText(PostsArrayList.get(position).PostId);
 
+
+
                    //to get people who said Yes
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = database.getReference("posts/" +PostsArrayList.get(position).PostId);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -76,49 +78,33 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                holder.variableTextViewYesPerson.setText(dataSnapshot.child("/Yes/name1").getValue().toString()+" said Yes!");
                    }
                String authorsUid =dataSnapshot.child("authorsEmail").getValue().toString();
-
                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference().child("users").child(authorsUid).child("thumb_image");
                databaseReference1.addValueEventListener(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                        Picasso.get().load(dataSnapshot.getValue().toString()).into(holder.imageView);
-
                    }
-
                    @Override
                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
                    }
                });
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
-
         // holder.variableTextViewYesPerson.setText(PostsArrayList.get(position).gt);
 
-
-
                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-
                        @Override
                        public void onClick(View view) {
-
                   Intent intent = new Intent(mContext,PostView.class);
-
                            TextView cityName =(TextView) view.findViewById(R.id.variableTextViewCity);
                                  TextView actionName =(TextView) view.findViewById(R.id.variableTextViewAction);
                                  TextView userName =(TextView) view.findViewById(R.id.variableTextViewUsersName);
                                  TextView discr =(TextView) view.findViewById(R.id.variableTextViewDescription);
                                  TextView postId =(TextView) view.findViewById(R.id.variableTextViewPostId);
-
-
 
                                  intent.putExtra("city",cityName.getText().toString().trim());
                                  intent.putExtra("action",actionName.getText().toString().trim());
@@ -126,22 +112,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                                  intent.putExtra("description",discr.getText().toString().trim());
                                  intent.putExtra("postId",postId.getText().toString().trim());
                                  mContext.startActivity(intent);
-
-
-
-
-
-
-                       }
-                   }
-                   );
+                       }});
 
         holder.YesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
                 /*
                 * I used 3 dataBaseReferences
                 * the first one to save the email of the Yes person
@@ -149,24 +124,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 * the second was to get the Author's Email to check who wrote the post
                 *
                 * */
-
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 final DatabaseReference databaseReference = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString()).child("Yes");
-
                 //to get the author's email
                 final DatabaseReference databaseReference2 = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString());
-
 
                databaseReference2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getValue() ==null){ //e7tyat
-
                             return;
                         }
                         Posts posts  =dataSnapshot.getValue(Posts.class);
-
                         if(!user.getUid().equals(posts.getAuthorsEmail())) { // to check if the user isn't saying yes to his own post
                             databaseReference.child("email1").setValue(user.getUid());
                             databaseReference.child("name1").setValue(user.getDisplayName());
@@ -174,38 +144,53 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         }
                         else{
                             Toast.makeText(mContext,"can't say yes to your own post!",Toast.LENGTH_SHORT).show();
-
                         }
+                        String uid =posts.getAuthorsEmail();
 
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
                     }
-                });
-
-
-
-            }
+                }); }
         });
+
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final DatabaseReference databaseReference3 = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString());
 
-                Intent i = new Intent(mContext, ProfileActivity.class);
-                 mContext.startActivity(i);
-            }
+                databaseReference3.child("authorsEmail").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getValue() ==null){ //e7tyat
+                            return;
+                        }
+
+                        String uid =dataSnapshot.getValue().toString();
+                        Intent profileIntent = new Intent(mContext, ProfileActivity.class);
+                        profileIntent.putExtra("uid",uid);
+                        mContext.startActivity(profileIntent);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                }); }
         });
+            }
 
 
 
 
 
 
-    }
+
+
+
+
+
+
 
 
 
