@@ -137,6 +137,7 @@ ProgressDialog registerProgressDialoge;
                     userMap.put("status","Hey there, I am a member of the Yes Family");
                     userMap.put("image","default");
                     userMap.put("thumb_image","default");
+                    userMap.put("name",register_usersname);
 
                     databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -147,7 +148,7 @@ ProgressDialog registerProgressDialoge;
 
 
 
-                    //to add the register usersname
+//                    //to add the register usersname
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setDisplayName(register_usersname).build();
                     user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {

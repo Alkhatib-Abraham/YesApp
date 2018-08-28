@@ -82,7 +82,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                databaseReference1.addValueEventListener(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                       if(dataSnapshot.getValue()!=null){
                        Picasso.get().load(dataSnapshot.getValue().toString()).into(holder.imageView);
+                   }
+                   else {
+                           Picasso.get().load(R.drawable.no_avatar).into(holder.imageView);
+
+                       }
                    }
                    @Override
                    public void onCancelled(@NonNull DatabaseError databaseError) {

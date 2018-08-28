@@ -3,15 +3,20 @@ package com.yesapp.yesapp.fragments;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.yesapp.yesapp.R;
@@ -50,6 +55,20 @@ public class ChangeName extends AppCompatDialogFragment {
                 String userId = user.getUid();
                 DatabaseReference databaseReference = firebaseDatabase.getReference().child("users").child(userId).child("name");
                 databaseReference.setValue(newName.getText().toString().trim());
+
+                //update both user name and display name
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(newName.getText().toString().trim()).build();
+                user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            Log.e("Test", "User display_name added");
+                        }
+                    }
+                });
+
+
                 Settings.refreshSettings(3);
             }
         });
