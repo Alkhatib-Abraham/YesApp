@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.yesapp.yesapp.R;
 
 /**
@@ -22,6 +24,8 @@ public class Fragment3 extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    FirebaseDatabase firebaseDatabase;
+
 
 
     public Fragment3() {
@@ -29,8 +33,14 @@ public class Fragment3 extends Fragment {
     }
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //DatabaseReference friendsReference
+
+        // TODO: get the Friends
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fragment3, container, false);
     }
@@ -49,10 +59,13 @@ public class Fragment3 extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-         String[] mDataset = new String[2];
+         String[] mDataset = new String[4];
 
-         mDataset[0]="dofkspdo";
-        mDataset[1]="murds";
+         mDataset[0]="Adam";
+        mDataset[1]="Samir";
+        mDataset[2]="Anna-Lena";
+        mDataset[3]="Samara";
+
 
         // specify an adapter (see also next example)
         mAdapter = new MyAdapter(mDataset);

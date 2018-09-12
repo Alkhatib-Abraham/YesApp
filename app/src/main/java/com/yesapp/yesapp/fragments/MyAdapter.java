@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.yesapp.yesapp.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private String[] mDataset;
@@ -16,10 +19,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView mTextView;
+        public TextView mFriendName;
+        public TextView mFriendStatus;
+
+        public CircleImageView mFriendImage;
+
         public MyViewHolder(View v) {
             super(v);
-            mTextView = v.findViewById(R.id.friend_display_name);
+            mFriendName = v.findViewById(R.id.friend_display_name);
+            mFriendImage =v.findViewById(R.id.friend_circle);
+            mFriendStatus = v.findViewById(R.id.friend_status);
+
         }
     }
 
@@ -45,7 +55,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(mDataset[position]);
+        holder.mFriendName.setText(mDataset[position]);
+        Picasso.get().load(R.drawable.no_avatar).into(holder.mFriendImage);
+        holder.mFriendStatus.setText("Hey there, I am a Yes Theorist!");
+
 
     }
 
