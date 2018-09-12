@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.yesapp.yesapp.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
