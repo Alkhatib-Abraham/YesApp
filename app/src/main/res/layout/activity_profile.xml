@@ -8,7 +8,7 @@
     tools:context=".activities.ProfileActivity">
 
     <Button
-        android:id="@+id/profile_send_request_btn2"
+        android:id="@+id/friend_req_decline_btn"
         android:layout_width="193dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -61,7 +61,7 @@
         app:srcCompat="@drawable/no_avatar" />
 
     <Button
-        android:id="@+id/profile_cancel_request_btn"
+        android:id="@+id/friend_req_btn"
         android:layout_width="193dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -70,7 +70,7 @@
         android:background="@color/colorAccent"
         android:text="Send Friend Request"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/profile_send_request_btn2"
+        app:layout_constraintBottom_toTopOf="@+id/friend_req_decline_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
@@ -84,7 +84,7 @@
         android:layout_marginStart="8dp"
         android:text="Total Friends"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/profile_cancel_request_btn"
+        app:layout_constraintBottom_toTopOf="@+id/friend_req_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
