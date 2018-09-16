@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -97,7 +99,7 @@ public class Settings extends AppCompatActivity {
             storageReference = firebaseStorage.getReference();
             storageReference.child("profile_images").child(userId+".jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
-                public void onComplete(@NonNull Task<Uri> task) {
+                public void onComplete(@NonNull final Task<Uri> task) {
                     if (task.isSuccessful()) {
 
                         if(task.getResult().toString().equals("default"))
@@ -106,7 +108,19 @@ public class Settings extends AppCompatActivity {
 
                         }
                         else {
-                            Picasso.get().load(task.getResult().toString()).placeholder(R.drawable.no_avatar).into(circleImageView);
+                            Picasso.get().load(task.getResult().toString()).networkPolicy(NetworkPolicy.OFFLINE)
+                                    .placeholder(R.drawable.no_avatar).into(circleImageView, new Callback() {
+                                @Override
+                                public void onSuccess() {
+
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+                                    Picasso.get().load(task.getResult().toString())
+                                            .placeholder(R.drawable.no_avatar).into(circleImageView);
+                                }
+                            });
                         }
                     }
                 }
@@ -115,6 +129,7 @@ public class Settings extends AppCompatActivity {
         DatabaseReference databaseReference;
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("users").child(userId);
+        databaseReference.keepSynced(true);
 
         if(level ==2 || level ==0) {
             databaseReference.child("status").addValueEventListener(new ValueEventListener() {
@@ -135,6 +150,7 @@ public class Settings extends AppCompatActivity {
 
         if(level ==3 || level ==0) {
             databaseReference = firebaseDatabase.getReference().child("users").child(userId);
+            databaseReference.keepSynced(true);
             databaseReference.child("name").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

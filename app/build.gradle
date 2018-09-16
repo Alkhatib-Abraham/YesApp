@@ -34,6 +34,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //load image
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.squareup.okhttp3:okhttp:2.5.0'
 
     //recyclerView
     implementation 'com.android.support:recyclerview-v7:26.1.0'
