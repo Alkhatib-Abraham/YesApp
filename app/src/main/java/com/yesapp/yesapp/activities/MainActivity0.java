@@ -37,7 +37,7 @@ public class MainActivity0 extends AppCompatActivity {
 
         //ToolBar
         mToolbar = (Toolbar) findViewById(R.id.main_bar_layout);
-        mToolbar.setTitle("Yes App2 Baby!");
+        mToolbar.setTitle("Yes App (don't forget to delete the other main)");
       //  mToolbar.setCollapsible(true);
         mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
