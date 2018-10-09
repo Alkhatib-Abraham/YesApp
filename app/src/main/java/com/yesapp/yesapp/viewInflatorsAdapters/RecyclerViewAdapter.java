@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +30,9 @@ import com.yesapp.yesapp.activities.PostView;
 import com.yesapp.yesapp.classes.Posts;
 import com.yesapp.yesapp.R;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -130,34 +135,126 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 * the second was to get the Author's Email to check who wrote the post
                 *
                 * */
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final DatabaseReference databaseReference = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString()).child("Yes");
-                //to get the author's email
-                final DatabaseReference databaseReference2 = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString());
 
-               databaseReference2.addValueEventListener(new ValueEventListener() {
+//                FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                final DatabaseReference databaseReference = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString()).child("Yes");
+//                //to get the author's email
+//                final DatabaseReference databaseReference2 = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString());
+//
+//               databaseReference2.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        if(dataSnapshot.getValue() ==null){ //e7tyat
+//                            return;
+//                        }
+//                        Posts posts  =dataSnapshot.getValue(Posts.class);
+//                        if(!user.getUid().equals(posts.getAuthorsEmail())) { // to check if the user isn't saying yes to his own post
+//                            databaseReference.child("email1").setValue(user.getUid());
+//                            databaseReference.child("name1").setValue(user.getDisplayName());
+//                            holder.variableTextViewYesPerson.setText(user.getDisplayName() + " said Yes!");
+//                        }
+//                        else{
+//                            Toast.makeText(mContext,"can't say yes to your own post!",Toast.LENGTH_SHORT).show();
+//                        }
+//                        String uid =posts.getAuthorsEmail();
+//
+//                    }
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//                    }
+//             });
+
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                // we need three things
+                // 1. to mark the post as said yes to
+                // 2. to add this post as yesed to the authors profile(users tree)
+                // 3. to add this post as yes to the yes sayer profile(users tree)
+
+
+
+
+                //to make 2 possible we need the uid of the Author
+                //to get the author's email
+                final DatabaseReference databaseReference4 = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString());
+                final String current_date = DateFormat.getDateTimeInstance().format(new Date());
+
+                databaseReference4.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getValue() ==null){ //e7tyat
                             return;
                         }
                         Posts posts  =dataSnapshot.getValue(Posts.class);
-                        if(!user.getUid().equals(posts.getAuthorsEmail())) { // to check if the user isn't saying yes to his own post
-                            databaseReference.child("email1").setValue(user.getUid());
-                            databaseReference.child("name1").setValue(user.getDisplayName());
-                            holder.variableTextViewYesPerson.setText(user.getDisplayName() + " said Yes!");
-                        }
-                        else{
+                        if(user.getUid().equals(posts.getAuthorsEmail())) { // to check if the user isn't saying yes to his own post
+
                             Toast.makeText(mContext,"can't say yes to your own post!",Toast.LENGTH_SHORT).show();
+                            return;
                         }
-                        String uid =posts.getAuthorsEmail();
+                        String uid =posts.getAuthorsEmail(); // it get's the UID just the name is false
+
+
+                        //2
+                        DatabaseReference databaseReference3 = database.getReference("yesed/" + uid)
+                                .child(holder.variableTextViewPostId.getText().toString());
+                        databaseReference3.setValue(user.getUid()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(mContext,"YES!",Toast.LENGTH_SHORT);
+                                    }
+                                });
+
+                        //1
+                        DatabaseReference databaseReference = database.getReference("posts/" +holder.variableTextViewPostId.getText().toString())
+                                .child("Yes");
+                        databaseReference.setValue(user.getUid()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(mContext,"YES!",Toast.LENGTH_SHORT);
+                            }
+                        });
+                        //TODO: do id better with more people possible
+                        //3
+                        DatabaseReference databaseReference2 = database.getReference("yes/" + user.getUid())
+                                .child(holder.variableTextViewPostId.getText().toString());
+                        databaseReference2.setValue(current_date).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(mContext,"YES!",Toast.LENGTH_SHORT);
+                            }
+                        });
+
+
 
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
-                }); }
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
         });
 
 

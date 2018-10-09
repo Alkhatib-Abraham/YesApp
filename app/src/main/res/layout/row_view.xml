@@ -93,7 +93,7 @@
     <TextView
         android:id="@+id/variableTextViewDescription"
         android:layout_width="336dp"
-        android:layout_height="wrap_content"
+        android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -113,21 +113,26 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="156dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Chat"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/variableTextViewDescription" />
+        android:text="got a Question?"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/yesBtn"
+        app:layout_constraintStart_toStartOf="@+id/yesBtn"
+        app:layout_constraintTop_toBottomOf="@+id/yesBtn" />
 
     <Button
         android:id="@+id/yesBtn"
-        android:layout_width="159dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:onClick="yesBtn"
         android:text="YES"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/variableTextViewDescription" />
 
     <TextView
